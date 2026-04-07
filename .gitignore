@@ -1,0 +1,37 @@
+# Claude Code (configuração local do editor)
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db
+*.DS_Store
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+*.log
+npm-debug.log*
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Dependencies (caso venha a usar npm)
+node_modules/
+
+# Build output
+dist/
+build/
+.output/
+
+# Cache
+.cache/
+.parcel-cache/
+.vite/
