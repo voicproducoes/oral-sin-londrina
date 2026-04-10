@@ -2,6 +2,14 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-5R3636DX');</script>
+  <!-- End Google Tag Manager -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- SEO Local -->
@@ -73,24 +81,45 @@
     }
 
     /* ── Botões ─── */
+    @property --btn-angle {
+      syntax: '<angle>';
+      inherits: false;
+      initial-value: 0deg;
+    }
+    @keyframes spin-gradient {
+      to { --btn-angle: 360deg; }
+    }
     .btn-primary {
-      display: inline-block;
-      background-color: #0F6934;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      isolation: isolate;
+      background: #0F6934;
       color: #fff;
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
       padding: 1rem 2.25rem;
-      border-radius: 0.5rem;
+      border-radius: 50px;
       border: none;
       cursor: pointer;
       text-align: center;
       letter-spacing: 0.01em;
-      transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 53px;
+      background: conic-gradient(from var(--btn-angle), #0F6934 0%, #0d8040 12%, #22c55e 25%, #6ee7a0 37%, #86efac 50%, #6ee7a0 63%, #22c55e 75%, #0d8040 88%, #0F6934 100%);
+      animation: spin-gradient 14s linear infinite;
+      z-index: -1;
     }
     .btn-primary:hover {
-      background-color: #0a4f26;
+      background: #0a4f26;
       transform: translateY(-1px);
-      box-shadow: 0 8px 24px rgba(15,105,52,0.25);
     }
     .btn-primary-lg {
       padding: 1.125rem 2.75rem;
@@ -170,9 +199,23 @@
     ::-webkit-scrollbar-track { background: #F3F3F1; }
     ::-webkit-scrollbar-thumb { background: #0F6934; border-radius: 3px; }
   </style>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-P2CW6RSZVG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-P2CW6RSZVG');
+  </script>
 </head>
 
 <body class="bg-offwhite">
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5R3636DX"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <!-- ═══════════════════════════════════
      HEADER (não conta como dobra)
@@ -823,7 +866,11 @@
   const form    = document.getElementById('contato-form');
   const success = document.getElementById('form-success');
 
-  form.addEventListener('submit', e => {
+  const SUPABASE_URL = 'https://lzzlxmymccqxrrmgfhob.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_Q6DeRnN1U0ba16H0P-xOBw_YXI1rZA5';
+  const WEBHOOK_URL  = 'https://nnwb.voictech.com.br/webhook/oral-sin-londrina';
+
+  form.addEventListener('submit', async e => {
     e.preventDefault();
     let valid = true;
 
@@ -836,6 +883,41 @@
     });
 
     if (!valid) return;
+
+    const params = new URLSearchParams(window.location.search);
+    const payload = {
+      nome:         form.querySelector('[name="nome"]').value.trim(),
+      telefone:     form.querySelector('[name="telefone"]').value.trim(),
+      pagina:       'index',
+      utm_source:   params.get('utm_source')   || null,
+      utm_medium:   params.get('utm_medium')   || null,
+      utm_campaign: params.get('utm_campaign') || null,
+      utm_content:  params.get('utm_content')  || null,
+    };
+
+    /* Supabase — fire and forget */
+    fetch(`${SUPABASE_URL}/rest/v1/leads`, {
+      method: 'POST',
+      headers: {
+        'apikey':        SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type':  'application/json',
+        'Prefer':        'return=minimal',
+      },
+      body: JSON.stringify(payload),
+    }).catch(err => console.error('Supabase error:', err));
+
+    /* Webhook — fire and forget */
+    fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    }).catch(err => console.error('Webhook error:', err));
+
+    /* GTM dataLayer event */
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'lead_submitted', ...payload });
+
     form.style.display = 'none';
     success.style.display = 'block';
     success.scrollIntoView({ behavior: 'smooth', block: 'center' });
