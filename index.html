@@ -58,6 +58,7 @@
       color: #374151;
       -webkit-font-smoothing: antialiased;
     }
+    section { position: relative; }
 
     /* ── Fade-in ─── */
     .fade-up {
@@ -81,20 +82,14 @@
     }
 
     /* ── Botões ─── */
-    @property --btn-angle {
-      syntax: '<angle>';
-      inherits: false;
-      initial-value: 0deg;
-    }
-    @keyframes spin-gradient {
-      to { --btn-angle: 360deg; }
+    @keyframes btn-glow {
+      0%, 100% { box-shadow: 0 4px 18px rgba(15,105,52,0.25); }
+      50%       { box-shadow: 0 4px 28px rgba(15,105,52,0.55); }
     }
     .btn-primary {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      position: relative;
-      isolation: isolate;
       background: #0F6934;
       color: #fff;
       font-family: 'Montserrat', sans-serif;
@@ -106,16 +101,8 @@
       text-align: center;
       letter-spacing: 0.01em;
       text-decoration: none;
+      animation: btn-glow 3s ease-in-out infinite;
       transition: background 0.2s ease, transform 0.2s ease;
-    }
-    .btn-primary::before {
-      content: '';
-      position: absolute;
-      inset: -3px;
-      border-radius: 53px;
-      background: conic-gradient(from var(--btn-angle), #0F6934 0%, #0d8040 12%, #22c55e 25%, #6ee7a0 37%, #86efac 50%, #6ee7a0 63%, #22c55e 75%, #0d8040 88%, #0F6934 100%);
-      animation: spin-gradient 14s linear infinite;
-      z-index: -1;
     }
     .btn-primary:hover {
       background: #0a4f26;
@@ -124,6 +111,10 @@
     .btn-primary-lg {
       padding: 1.125rem 2.75rem;
       font-size: 1.0625rem;
+    }
+    .btn-block-mobile {
+      width: 100%;
+      justify-content: center;
     }
 
     /* ── Cards ─── */
@@ -134,6 +125,44 @@
       transition: box-shadow 0.25s ease, transform 0.25s ease;
     }
     .card:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.09); transform: translateY(-2px); }
+    .section-card {
+      border-radius: 1.5rem;
+      border: 1px solid rgba(15, 105, 52, 0.08);
+      box-shadow: 0 16px 40px rgba(17, 24, 39, 0.06);
+    }
+    .chip-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 0.875rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(17, 24, 39, 0.08);
+      background: rgba(255,255,255,0.92);
+      box-shadow: 0 8px 20px rgba(17, 24, 39, 0.05);
+    }
+    .tone-soft {
+      background: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(249,249,247,0.96) 100%);
+    }
+    .tone-muted {
+      background: linear-gradient(180deg, #eef2ee 0%, #f4f3ef 100%);
+    }
+    .tone-contrast {
+      background: linear-gradient(180deg, #ffffff 0%, #eef7f1 100%);
+    }
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.85rem;
+      border-radius: 9999px;
+      background: rgba(15, 105, 52, 0.08);
+      color: #0F6934;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
 
     /* ── Accordion ─── */
     .acc-content {
@@ -141,18 +170,19 @@
       overflow: hidden;
       transition: max-height 0.38s ease;
     }
-    .acc-content.open { max-height: 240px; }
+    .acc-content.open { max-height: 320px; }
     .acc-icon { transition: transform 0.3s ease; }
     .acc-item.active .acc-icon { transform: rotate(45deg); }
 
     /* ── Formulário ─── */
     .form-input {
       width: 100%;
-      padding: 0.875rem 1rem;
+      min-height: 3.5rem;
+      padding: 1rem 1rem;
       border: 1.5px solid #e5e7eb;
-      border-radius: 0.5rem;
+      border-radius: 0.9rem;
       font-family: 'Inter', sans-serif;
-      font-size: 0.9375rem;
+      font-size: 1rem;
       color: #374151;
       background: #fff;
       outline: none;
@@ -193,6 +223,51 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
+    .hero-panel {
+      border-radius: 1.75rem;
+      background: linear-gradient(180deg, rgba(255,255,255,0.97) 0%, rgba(255,255,255,0.9) 100%);
+      border: 1px solid rgba(15, 105, 52, 0.08);
+      box-shadow: 0 18px 40px rgba(17, 24, 39, 0.08);
+    }
+    .quote-panel {
+      border-radius: 1.25rem;
+      background: #ffffff;
+      border: 1px solid rgba(15, 105, 52, 0.1);
+      box-shadow: 0 12px 26px rgba(17, 24, 39, 0.05);
+    }
+    .benefit-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .benefit-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 4px;
+      background: linear-gradient(180deg, #0F6934 0%, #31a05a 100%);
+    }
+    .footer-nav-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.75rem;
+      padding: 0.7rem 1rem;
+      border-radius: 9999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer-nav-link-cta {
+      background: #0F6934;
+      color: #fff;
+      border-color: rgba(15,105,52,0.5);
+      box-shadow: 0 10px 24px rgba(15,105,52,0.3);
+    }
+    @media (min-width: 640px) {
+      .btn-block-mobile { width: auto; }
+    }
+    @media (max-width: 639px) {
+      .section-card { border-radius: 1.25rem; }
+    }
 
     /* ── Scrollbar ─── */
     ::-webkit-scrollbar { width: 5px; }
@@ -220,12 +295,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ═══════════════════════════════════
      HEADER (não conta como dobra)
 ═══════════════════════════════════ -->
-<header id="site-header" class="fixed top-0 left-0 right-0 z-50 bg-white">
-  <div class="max-w-6xl mx-auto px-5 sm:px-8 flex items-center justify-between h-16 sm:h-20">
+<header id="site-header" class="fixed top-0 left-0 right-0 z-50 bg-white/95 border-b border-black/5">
+  <div class="max-w-6xl mx-auto px-4 sm:px-8 flex items-center justify-between h-16 sm:h-20 gap-4">
     <a href="#" aria-label="Oral Sin Implantes — início">
       <img src="logo_oral_sin.webp" alt="Oral Sin Implantes" class="h-8 sm:h-10 w-auto" />
     </a>
-    <a href="#formulario" class="btn-primary text-sm px-5 py-2.5">Agendar avaliação</a>
+    <a href="#formulario" class="btn-primary text-sm px-4 sm:px-5 py-2.5 whitespace-nowrap">Agendar avaliação</a>
   </div>
 </header>
 
@@ -233,75 +308,79 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ═══════════════════════════════════
      DOBRA 1 — Hero
 ═══════════════════════════════════ -->
-<section id="hero" class="pt-24 sm:pt-32 pb-14 sm:pb-20 bg-offwhite relative overflow-hidden">
+<section id="hero" class="pt-24 sm:pt-32 pb-16 sm:pb-24 bg-offwhite relative overflow-hidden">
 
   <!-- Detalhe verde sutil -->
   <div class="absolute inset-y-0 right-0 w-2/5 bg-verde-light opacity-25 -z-0 hidden lg:block"
        style="clip-path: ellipse(85% 100% at 95% 50%);"></div>
 
-  <div class="relative z-10 max-w-6xl mx-auto px-5 sm:px-8">
-    <div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+  <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-8">
+    <div class="grid lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] gap-6 sm:gap-10 lg:gap-14 items-center">
 
       <!-- Esquerda: copy -->
-      <div class="fade-up">
-        <span class="inline-block text-xs font-semibold tracking-widest uppercase text-verde bg-verde-light px-3 py-1 rounded-full mb-5 font-headline">
-          Londrina / PR
-        </span>
+      <div class="fade-up order-1">
+        <div class="hero-panel p-6 sm:p-8 lg:p-10">
+          <span class="inline-flex text-[0.7rem] sm:text-xs font-semibold tracking-[0.24em] uppercase text-verde/80 bg-verde-light px-3 py-1.5 rounded-full mb-4 sm:mb-5 font-headline">
+            Londrina / PR
+          </span>
 
-        <h1 class="font-headline font-bold text-grafite leading-tight mb-4"
-            style="font-size: clamp(1.9rem, 4vw, 3rem);">
-          Implante Dentário<br/>
-          <span class="text-verde-grad">em Londrina</span>
-        </h1>
+          <h1 class="font-headline font-bold text-grafite leading-[1.03] tracking-tight mb-4"
+              style="font-size: clamp(2.1rem, 8vw, 3.8rem);">
+            Implante Dentário<br/>
+            <span class="text-verde-grad">em Londrina</span>
+          </h1>
 
-        <p class="font-headline font-semibold text-grafite text-lg sm:text-xl leading-snug mb-3">
-          Volte a mastigar, sorrir e falar com segurança.
-        </p>
+          <div class="max-w-xl">
+            <p class="font-headline font-semibold text-grafite text-lg sm:text-xl lg:text-2xl leading-snug mb-3">
+              Volte a mastigar, sorrir e falar com segurança.
+            </p>
 
-        <p class="text-gray-500 text-base leading-relaxed mb-8 max-w-md">
-          Tratamento com foco em firmeza, conforto e resultado natural.<br/>
-          Atendimento consultivo, avaliação cuidadosa e equipe especializada.
-        </p>
+            <p class="text-gray-500 text-[1rem] sm:text-lg leading-relaxed mb-7 sm:mb-8">
+              Tratamento com foco em firmeza, conforto e resultado natural.<br/>
+              Atendimento consultivo, avaliação cuidadosa e equipe especializada.
+            </p>
+          </div>
 
-        <a href="#formulario" class="btn-primary btn-primary-lg mb-8 inline-block">
-          Quero agendar minha avaliação
-        </a>
+          <a href="#formulario" class="btn-primary btn-primary-lg btn-block-mobile mb-7 sm:mb-8 inline-flex">
+            Quero agendar minha avaliação
+          </a>
 
-        <!-- Apoios -->
-        <div class="flex flex-wrap gap-2">
-          <span class="inline-flex items-center gap-1.5 text-xs font-medium text-grafite bg-white border border-gray-200 rounded-full px-3 py-1.5 shadow-sm">
+          <!-- Apoios -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
+            <span class="chip-card text-xs sm:text-sm font-medium text-grafite">
             <svg class="w-3 h-3 text-verde flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
             Especialistas em implante
           </span>
-          <span class="inline-flex items-center gap-1.5 text-xs font-medium text-grafite bg-white border border-gray-200 rounded-full px-3 py-1.5 shadow-sm">
+          <span class="chip-card text-xs sm:text-sm font-medium text-grafite">
             <svg class="w-3 h-3 text-verde flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
             Explicação clara
           </span>
-          <span class="inline-flex items-center gap-1.5 text-xs font-medium text-grafite bg-white border border-gray-200 rounded-full px-3 py-1.5 shadow-sm">
+          <span class="chip-card text-xs sm:text-sm font-medium text-grafite">
             <svg class="w-3 h-3 text-verde flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
             Avaliação individual
           </span>
-          <span class="inline-flex items-center gap-1.5 text-xs font-medium text-grafite bg-white border border-gray-200 rounded-full px-3 py-1.5 shadow-sm">
+          <span class="chip-card text-xs sm:text-sm font-medium text-grafite">
             <svg class="w-3 h-3 text-verde flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
             Condições de pagamento
           </span>
+          </div>
         </div>
       </div>
 
       <!-- Direita: imagem + brasão integrado -->
-      <div class="fade-up fade-up-d2 flex flex-col items-center gap-5">
-        <div class="relative w-full">
+      <div class="fade-up fade-up-d2 flex flex-col items-center gap-4 order-2">
+        <div class="relative w-full max-w-xl">
           <img
             src="hero-institucional.png"
             alt="Paciente sorrindo com dentista especialista em implantes na Oral Sin Londrina"
-            class="w-full rounded-xl shadow-lg object-cover"
-            style="max-height: 440px; object-position: center top;"
+            class="w-full rounded-[1.5rem] shadow-[0_24px_60px_rgba(17,24,39,0.14)] object-cover"
+            style="max-height: 460px; object-position: center top;"
           />
           <!-- Brasão integrado no canto da imagem -->
-          <div class="absolute -bottom-5 -right-3 sm:-right-5">
+          <div class="absolute -bottom-4 right-4 sm:-bottom-5 sm:-right-5">
             <img src="Brasao-OS-1-1.webp"
                  alt="Oral Sin — Rede de Implantes Nº 1 do Brasil"
-                 class="w-24 sm:w-28 drop-shadow-md" />
+                 class="w-20 sm:w-24 lg:w-28 drop-shadow-[0_14px_30px_rgba(17,24,39,0.25)]" />
           </div>
         </div>
       </div>
@@ -314,10 +393,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ═══════════════════════════════════
      DOBRA 2 — Dor da persona
 ═══════════════════════════════════ -->
-<section id="dor" class="py-14 sm:py-20 bg-cinzaclaro">
-  <div class="max-w-5xl mx-auto px-5 sm:px-8">
+<section id="dor" class="py-16 sm:py-24 tone-muted">
+  <div class="max-w-5xl mx-auto px-4 sm:px-8">
+    <div class="section-card px-5 py-8 sm:p-10 lg:p-12">
 
-    <div class="text-center mb-10 fade-up">
+    <div class="text-center mb-8 sm:mb-10 fade-up">
       <div class="sec-line"></div>
       <h2 class="font-headline font-bold text-2xl sm:text-3xl text-grafite mb-2">
         Perdeu dentes ou sofre com dentadura solta?
@@ -328,64 +408,64 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <!-- Cards de dor -->
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-10">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 sm:gap-4 mb-8 sm:mb-10">
 
-      <div class="card p-5 text-center fade-up fade-up-d1">
-        <div class="w-10 h-10 rounded-xl bg-verde-light flex items-center justify-center mx-auto mb-3">
+      <div class="card p-5 sm:p-6 text-left sm:text-center fade-up fade-up-d1">
+        <div class="w-10 h-10 rounded-xl bg-verde-light flex items-center justify-center sm:mx-auto mb-3">
           <svg class="w-5 h-5 text-verde" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
             <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/>
           </svg>
         </div>
-        <p class="font-headline font-semibold text-grafite text-xs leading-snug">Dificulta para mastigar</p>
+        <p class="font-headline font-semibold text-grafite text-sm leading-snug">Dificulta para mastigar</p>
       </div>
 
-      <div class="card p-5 text-center fade-up fade-up-d2">
-        <div class="w-10 h-10 rounded-xl bg-verde-light flex items-center justify-center mx-auto mb-3">
+      <div class="card p-5 sm:p-6 text-left sm:text-center fade-up fade-up-d2">
+        <div class="w-10 h-10 rounded-xl bg-verde-light flex items-center justify-center sm:mx-auto mb-3">
           <svg class="w-5 h-5 text-verde" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
             <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
           </svg>
         </div>
-        <p class="font-headline font-semibold text-grafite text-xs leading-snug">Insegurança para falar</p>
+        <p class="font-headline font-semibold text-grafite text-sm leading-snug">Insegurança para falar</p>
       </div>
 
-      <div class="card p-5 text-center fade-up fade-up-d3">
-        <div class="w-10 h-10 rounded-xl bg-verde-light flex items-center justify-center mx-auto mb-3">
+      <div class="card p-5 sm:p-6 text-left sm:text-center fade-up fade-up-d3">
+        <div class="w-10 h-10 rounded-xl bg-verde-light flex items-center justify-center sm:mx-auto mb-3">
           <svg class="w-5 h-5 text-verde" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
             <path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
           </svg>
         </div>
-        <p class="font-headline font-semibold text-grafite text-xs leading-snug">Vergonha nas fotos</p>
+        <p class="font-headline font-semibold text-grafite text-sm leading-snug">Vergonha nas fotos</p>
       </div>
 
-      <div class="card p-5 text-center fade-up fade-up-d4">
-        <div class="w-10 h-10 rounded-xl bg-verde-light flex items-center justify-center mx-auto mb-3">
+      <div class="card p-5 sm:p-6 text-left sm:text-center fade-up fade-up-d4">
+        <div class="w-10 h-10 rounded-xl bg-verde-light flex items-center justify-center sm:mx-auto mb-3">
           <svg class="w-5 h-5 text-verde" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
           </svg>
         </div>
-        <p class="font-headline font-semibold text-grafite text-xs leading-snug">Desconforto no dia a dia</p>
+        <p class="font-headline font-semibold text-grafite text-sm leading-snug">Desconforto no dia a dia</p>
       </div>
 
-      <div class="card p-5 text-center fade-up fade-up-d5 col-span-2 sm:col-span-1">
-        <div class="w-10 h-10 rounded-xl bg-verde-light flex items-center justify-center mx-auto mb-3">
+      <div class="card p-5 sm:p-6 text-left sm:text-center fade-up fade-up-d5 sm:col-span-2 lg:col-span-1">
+        <div class="w-10 h-10 rounded-xl bg-verde-light flex items-center justify-center sm:mx-auto mb-3">
           <svg class="w-5 h-5 text-verde" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
             <path stroke-linecap="round" stroke-linejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
           </svg>
         </div>
-        <p class="font-headline font-semibold text-grafite text-xs leading-snug">Medo de sorrir naturalmente</p>
+        <p class="font-headline font-semibold text-grafite text-sm leading-snug">Medo de sorrir naturalmente</p>
       </div>
 
     </div>
 
     <!-- Texto + frase de apoio -->
     <div class="max-w-2xl mx-auto text-center fade-up">
-      <p class="text-gray-500 text-base leading-relaxed mb-6">
+      <p class="text-gray-500 text-base sm:text-lg leading-relaxed mb-6 sm:mb-7">
         Muita gente convive com isso por anos.<br/>
         Não porque quer.<br/>
         Mas por medo, insegurança e receio de investir errado.
       </p>
-      <div class="inline-block bg-white border-l-4 border-verde rounded-lg px-7 py-5 text-left shadow-sm">
+      <div class="quote-panel inline-block px-6 py-5 sm:px-7 sm:py-6 text-left">
         <p class="font-headline font-semibold text-grafite text-base sm:text-lg">
           "Você não precisa continuar adiando uma solução importante."
         </p>
@@ -393,14 +473,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
   </div>
+  </div>
 </section>
 
 
 <!-- ═══════════════════════════════════
      DOBRA 3 — O que a pessoa compra
 ═══════════════════════════════════ -->
-<section id="beneficios" class="py-14 sm:py-20 bg-offwhite">
-  <div class="max-w-5xl mx-auto px-5 sm:px-8">
+<section id="beneficios" class="py-16 sm:py-24 tone-contrast">
+  <div class="max-w-5xl mx-auto px-4 sm:px-8">
+    <div class="px-0 sm:px-2 lg:px-6">
 
     <div class="text-center mb-3 fade-up">
       <div class="sec-line"></div>
@@ -410,67 +492,68 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="font-headline font-semibold text-verde text-lg sm:text-xl mb-4">
         É voltar a viver com mais segurança.
       </p>
-      <p class="text-gray-500 text-base mb-10">
+      <p class="text-gray-500 text-base sm:text-lg mb-10">
         Com o implante dentário, o objetivo é recuperar:
       </p>
     </div>
 
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 mb-10">
 
-      <div class="card p-6 fade-up fade-up-d1">
+      <div class="card benefit-card p-6 sm:p-7 fade-up fade-up-d1">
         <div class="w-10 h-10 rounded-xl bg-verde flex items-center justify-center mb-4">
           <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
           </svg>
         </div>
-        <p class="font-headline font-semibold text-grafite text-sm">Firmeza para mastigar</p>
+        <p class="font-headline font-semibold text-grafite text-base leading-snug">Firmeza para mastigar</p>
       </div>
 
-      <div class="card p-6 fade-up fade-up-d2">
+      <div class="card benefit-card p-6 sm:p-7 fade-up fade-up-d2">
         <div class="w-10 h-10 rounded-xl bg-verde flex items-center justify-center mb-4">
           <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
           </svg>
         </div>
-        <p class="font-headline font-semibold text-grafite text-sm">Segurança para sorrir</p>
+        <p class="font-headline font-semibold text-grafite text-base leading-snug">Segurança para sorrir</p>
       </div>
 
-      <div class="card p-6 fade-up fade-up-d3">
+      <div class="card benefit-card p-6 sm:p-7 fade-up fade-up-d3">
         <div class="w-10 h-10 rounded-xl bg-verde flex items-center justify-center mb-4">
           <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
           </svg>
         </div>
-        <p class="font-headline font-semibold text-grafite text-sm">Confiança para falar</p>
+        <p class="font-headline font-semibold text-grafite text-base leading-snug">Confiança para falar</p>
       </div>
 
-      <div class="card p-6 fade-up fade-up-d2">
+      <div class="card benefit-card p-6 sm:p-7 fade-up fade-up-d2">
         <div class="w-10 h-10 rounded-xl bg-verde flex items-center justify-center mb-4">
           <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
           </svg>
         </div>
-        <p class="font-headline font-semibold text-grafite text-sm">Conforto no dia a dia</p>
+        <p class="font-headline font-semibold text-grafite text-base leading-snug">Conforto no dia a dia</p>
       </div>
 
-      <div class="card p-6 fade-up fade-up-d3">
+      <div class="card benefit-card p-6 sm:p-7 fade-up fade-up-d3 sm:col-span-2 lg:col-span-1">
         <div class="w-10 h-10 rounded-xl bg-verde flex items-center justify-center mb-4">
           <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
           </svg>
         </div>
-        <p class="font-headline font-semibold text-grafite text-sm">Naturalidade no convívio social</p>
+        <p class="font-headline font-semibold text-grafite text-base leading-snug">Naturalidade no convívio social</p>
       </div>
 
     </div>
 
     <div class="text-center fade-up">
-      <p class="text-gray-500 text-sm mb-7 italic">Mais do que dentes, é qualidade de vida.</p>
-      <a href="#formulario" class="btn-primary btn-primary-lg">
+      <p class="text-gray-500 text-base sm:text-lg mb-7 italic">Mais do que dentes, é qualidade de vida.</p>
+      <a href="#formulario" class="btn-primary btn-primary-lg btn-block-mobile inline-flex">
         Quero entender meu caso
       </a>
     </div>
 
+  </div>
   </div>
 </section>
 
@@ -478,8 +561,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ═══════════════════════════════════
      DOBRA 4 — Quebra de objeções
 ═══════════════════════════════════ -->
-<section id="objecoes" class="py-14 sm:py-20 bg-cinzaclaro">
-  <div class="max-w-3xl mx-auto px-5 sm:px-8">
+<section id="objecoes" class="py-16 sm:py-24 tone-soft">
+  <div class="max-w-4xl mx-auto px-4 sm:px-8">
+    <div class="section-card bg-white px-5 py-8 sm:p-10 lg:p-12">
 
     <div class="text-center mb-10 fade-up">
       <div class="sec-line"></div>
@@ -488,88 +572,88 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </h2>
     </div>
 
-    <div class="space-y-3 fade-up" id="accordion">
+    <div class="space-y-4 fade-up" id="accordion">
 
       <!-- Objeção 1 -->
-      <div class="card acc-item overflow-hidden">
-        <button class="acc-trigger w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none" aria-expanded="false">
-          <span class="font-headline font-semibold text-grafite text-sm sm:text-base pr-4">
+      <div class="card acc-item overflow-hidden border border-black/5">
+        <button class="acc-trigger w-full flex items-center justify-between px-5 sm:px-6 py-5 sm:py-6 text-left focus:outline-none" aria-expanded="false">
+          <span class="font-headline font-semibold text-grafite text-base sm:text-lg pr-4 leading-snug">
             "Tenho medo de sentir dor."
           </span>
           <svg class="acc-icon w-5 h-5 text-verde flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
           </svg>
         </button>
-        <div class="acc-content px-6 pb-5">
-          <p class="text-gray-500 text-sm leading-relaxed">
+        <div class="acc-content px-5 sm:px-6 pb-5 sm:pb-6">
+          <p class="text-gray-500 text-sm sm:text-base leading-relaxed">
             Cada caso é avaliado com cuidado. Você recebe orientação clara em cada etapa — antes, durante e depois do tratamento.
           </p>
         </div>
       </div>
 
       <!-- Objeção 2 -->
-      <div class="card acc-item overflow-hidden">
-        <button class="acc-trigger w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none" aria-expanded="false">
-          <span class="font-headline font-semibold text-grafite text-sm sm:text-base pr-4">
+      <div class="card acc-item overflow-hidden border border-black/5">
+        <button class="acc-trigger w-full flex items-center justify-between px-5 sm:px-6 py-5 sm:py-6 text-left focus:outline-none" aria-expanded="false">
+          <span class="font-headline font-semibold text-grafite text-base sm:text-lg pr-4 leading-snug">
             "Tenho medo da cirurgia."
           </span>
           <svg class="acc-icon w-5 h-5 text-verde flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
           </svg>
         </button>
-        <div class="acc-content px-6 pb-5">
-          <p class="text-gray-500 text-sm leading-relaxed">
+        <div class="acc-content px-5 sm:px-6 pb-5 sm:pb-6">
+          <p class="text-gray-500 text-sm sm:text-base leading-relaxed">
             O tratamento é explicado com simplicidade, sem pressão e sem surpresa. Nada é feito sem que você entenda e concorde com cada passo.
           </p>
         </div>
       </div>
 
       <!-- Objeção 3 -->
-      <div class="card acc-item overflow-hidden">
-        <button class="acc-trigger w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none" aria-expanded="false">
-          <span class="font-headline font-semibold text-grafite text-sm sm:text-base pr-4">
+      <div class="card acc-item overflow-hidden border border-black/5">
+        <button class="acc-trigger w-full flex items-center justify-between px-5 sm:px-6 py-5 sm:py-6 text-left focus:outline-none" aria-expanded="false">
+          <span class="font-headline font-semibold text-grafite text-base sm:text-lg pr-4 leading-snug">
             "E se eu gastar e não der certo?"
           </span>
           <svg class="acc-icon w-5 h-5 text-verde flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
           </svg>
         </button>
-        <div class="acc-content px-6 pb-5">
-          <p class="text-gray-500 text-sm leading-relaxed">
+        <div class="acc-content px-5 sm:px-6 pb-5 sm:pb-6">
+          <p class="text-gray-500 text-sm sm:text-base leading-relaxed">
             A decisão precisa ser segura, planejada e alinhada ao seu caso. Por isso começamos com uma avaliação individual — para garantir que faz sentido para você antes de qualquer compromisso.
           </p>
         </div>
       </div>
 
       <!-- Objeção 4 -->
-      <div class="card acc-item overflow-hidden">
-        <button class="acc-trigger w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none" aria-expanded="false">
-          <span class="font-headline font-semibold text-grafite text-sm sm:text-base pr-4">
+      <div class="card acc-item overflow-hidden border border-black/5">
+        <button class="acc-trigger w-full flex items-center justify-between px-5 sm:px-6 py-5 sm:py-6 text-left focus:outline-none" aria-expanded="false">
+          <span class="font-headline font-semibold text-grafite text-base sm:text-lg pr-4 leading-snug">
             "Tenho medo de ficar com aparência artificial."
           </span>
           <svg class="acc-icon w-5 h-5 text-verde flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
           </svg>
         </button>
-        <div class="acc-content px-6 pb-5">
-          <p class="text-gray-500 text-sm leading-relaxed">
+        <div class="acc-content px-5 sm:px-6 pb-5 sm:pb-6">
+          <p class="text-gray-500 text-sm sm:text-base leading-relaxed">
             O foco é devolver firmeza, conforto e naturalidade. O resultado é planejado para parecer e funcionar como seus próprios dentes.
           </p>
         </div>
       </div>
 
       <!-- Objeção 5 -->
-      <div class="card acc-item overflow-hidden">
-        <button class="acc-trigger w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none" aria-expanded="false">
-          <span class="font-headline font-semibold text-grafite text-sm sm:text-base pr-4">
+      <div class="card acc-item overflow-hidden border border-black/5">
+        <button class="acc-trigger w-full flex items-center justify-between px-5 sm:px-6 py-5 sm:py-6 text-left focus:outline-none" aria-expanded="false">
+          <span class="font-headline font-semibold text-grafite text-base sm:text-lg pr-4 leading-snug">
             "Não sei se cabe no meu orçamento."
           </span>
           <svg class="acc-icon w-5 h-5 text-verde flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
           </svg>
         </button>
-        <div class="acc-content px-6 pb-5">
-          <p class="text-gray-500 text-sm leading-relaxed">
+        <div class="acc-content px-5 sm:px-6 pb-5 sm:pb-6">
+          <p class="text-gray-500 text-sm sm:text-base leading-relaxed">
             A avaliação também ajuda a entender possibilidades reais de tratamento. Você vai saber os valores e as condições antes de tomar qualquer decisão.
           </p>
         </div>
@@ -578,13 +662,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <!-- Frase final forte -->
-    <div class="text-center mt-10 fade-up">
+    <div class="text-center mt-10 sm:mt-12 fade-up">
       <p class="font-headline font-bold text-grafite text-xl sm:text-2xl">
         "Você não precisa decidir no escuro."
       </p>
-      <p class="text-gray-400 text-sm mt-2">A avaliação existe para que você se sinta segura antes de qualquer passo.</p>
+      <p class="text-gray-400 text-sm sm:text-base mt-2">A avaliação existe para que você se sinta segura antes de qualquer passo.</p>
     </div>
 
+  </div>
   </div>
 </section>
 
@@ -592,8 +677,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ═══════════════════════════════════
      DOBRA 5 — Confiança na clínica
 ═══════════════════════════════════ -->
-<section id="clinica" class="py-14 sm:py-20 bg-offwhite">
-  <div class="max-w-5xl mx-auto px-5 sm:px-8">
+<section id="clinica" class="py-16 sm:py-24 bg-offwhite">
+  <div class="max-w-5xl mx-auto px-4 sm:px-8">
+    <div class="section-card tone-soft px-5 py-8 sm:p-10 lg:p-12">
 
     <div class="text-center mb-10 fade-up">
       <div class="sec-line"></div>
@@ -602,73 +688,74 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </h2>
     </div>
 
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 mb-10">
 
-      <div class="card p-6 fade-up fade-up-d1">
+      <div class="card p-6 sm:p-7 fade-up fade-up-d1">
         <div class="w-10 h-10 rounded-xl bg-verde-light flex items-center justify-center mb-3">
           <svg class="w-5 h-5 text-verde" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
           </svg>
         </div>
-        <p class="font-headline font-semibold text-grafite text-sm">Clínica com foco em implante dentário</p>
+        <p class="font-headline font-semibold text-grafite text-base leading-snug">Clínica com foco em implante dentário</p>
       </div>
 
-      <div class="card p-6 fade-up fade-up-d2">
+      <div class="card p-6 sm:p-7 fade-up fade-up-d2">
         <div class="w-10 h-10 rounded-xl bg-verde-light flex items-center justify-center mb-3">
           <svg class="w-5 h-5 text-verde" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
             <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
           </svg>
         </div>
-        <p class="font-headline font-semibold text-grafite text-sm">Equipe experiente em reabilitação oral</p>
+        <p class="font-headline font-semibold text-grafite text-base leading-snug">Equipe experiente em reabilitação oral</p>
       </div>
 
-      <div class="card p-6 fade-up fade-up-d3">
+      <div class="card p-6 sm:p-7 fade-up fade-up-d3">
         <div class="w-10 h-10 rounded-xl bg-verde-light flex items-center justify-center mb-3">
           <svg class="w-5 h-5 text-verde" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
           </svg>
         </div>
-        <p class="font-headline font-semibold text-grafite text-sm">Atendimento consultivo e acolhedor</p>
+        <p class="font-headline font-semibold text-grafite text-base leading-snug">Atendimento consultivo e acolhedor</p>
       </div>
 
-      <div class="card p-6 fade-up fade-up-d2">
+      <div class="card p-6 sm:p-7 fade-up fade-up-d2">
         <div class="w-10 h-10 rounded-xl bg-verde-light flex items-center justify-center mb-3">
           <svg class="w-5 h-5 text-verde" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
           </svg>
         </div>
-        <p class="font-headline font-semibold text-grafite text-sm">Explicação simples e direta</p>
+        <p class="font-headline font-semibold text-grafite text-base leading-snug">Explicação simples e direta</p>
       </div>
 
-      <div class="card p-6 fade-up fade-up-d3">
+      <div class="card p-6 sm:p-7 fade-up fade-up-d3">
         <div class="w-10 h-10 rounded-xl bg-verde-light flex items-center justify-center mb-3">
           <svg class="w-5 h-5 text-verde" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
           </svg>
         </div>
-        <p class="font-headline font-semibold text-grafite text-sm">Tratamento com planejamento</p>
+        <p class="font-headline font-semibold text-grafite text-base leading-snug">Tratamento com planejamento</p>
       </div>
 
-      <div class="card p-6 fade-up fade-up-d4">
+      <div class="card p-6 sm:p-7 fade-up fade-up-d4">
         <div class="w-10 h-10 rounded-xl bg-verde-light flex items-center justify-center mb-3">
           <svg class="w-5 h-5 text-verde" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
           </svg>
         </div>
-        <p class="font-headline font-semibold text-grafite text-sm">Mais segurança do começo ao fim</p>
+        <p class="font-headline font-semibold text-grafite text-base leading-snug">Mais segurança do começo ao fim</p>
       </div>
 
     </div>
 
     <div class="text-center fade-up">
-      <p class="text-gray-500 text-sm italic mb-7">
+      <p class="text-gray-500 text-base sm:text-lg italic mb-7">
         Aqui, você entende seu caso antes de tomar qualquer decisão.
       </p>
-      <a href="#formulario" class="btn-primary btn-primary-lg">
+      <a href="#formulario" class="btn-primary btn-primary-lg btn-block-mobile inline-flex">
         Agendar avaliação
       </a>
     </div>
 
+  </div>
   </div>
 </section>
 
@@ -676,56 +763,58 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ═══════════════════════════════════
      DOBRA 6 — Fechamento + CTA + Formulário
 ═══════════════════════════════════ -->
-<section id="formulario" class="py-14 sm:py-20" style="background-color: #0F6934;">
-  <div class="max-w-5xl mx-auto px-5 sm:px-8">
+<section id="formulario" class="py-16 sm:py-24" style="background: linear-gradient(180deg, #0F6934 0%, #0b5328 100%);">
+  <div class="max-w-5xl mx-auto px-4 sm:px-8">
 
-    <div class="grid lg:grid-cols-2 gap-12 items-start">
+    <div class="grid lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] gap-8 sm:gap-12 items-start">
 
       <!-- Esquerda: copy de fechamento -->
       <div class="fade-up">
+        <div class="rounded-[1.75rem] border border-white/10 bg-white/5 backdrop-blur-sm p-6 sm:p-8 lg:p-9">
         <img src="logo_oral_sin.webp" alt="Oral Sin Implantes"
-             class="h-8 sm:h-10 w-auto mb-8 brightness-0 invert" />
+             class="h-8 sm:h-10 w-auto mb-8" />
 
         <h2 class="font-headline font-bold text-white text-2xl sm:text-3xl leading-tight mb-5">
           Está em tempo de resolver isso com segurança.
         </h2>
 
-        <p class="text-green-100 text-base leading-relaxed mb-7">
+        <p class="text-green-100 text-base sm:text-lg leading-relaxed mb-7">
           Se você perdeu dentes, usa dentadura ou já adiou esse tratamento por medo, insegurança ou receio de gastar sem resultado, o primeiro passo é uma avaliação cuidadosa.
         </p>
 
         <ul class="space-y-3">
-          <li class="flex items-start gap-3 text-green-100 text-sm">
+          <li class="flex items-start gap-3 text-green-100 text-sm sm:text-base rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
             <svg class="w-5 h-5 text-green-300 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
             Descubra se o implante faz sentido para o seu caso
           </li>
-          <li class="flex items-start gap-3 text-green-100 text-sm">
+          <li class="flex items-start gap-3 text-green-100 text-sm sm:text-base rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
             <svg class="w-5 h-5 text-green-300 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
             Entenda sua situação atual
           </li>
-          <li class="flex items-start gap-3 text-green-100 text-sm">
+          <li class="flex items-start gap-3 text-green-100 text-sm sm:text-base rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
             <svg class="w-5 h-5 text-green-300 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
             Tire dúvidas sobre o tratamento
           </li>
-          <li class="flex items-start gap-3 text-green-100 text-sm">
+          <li class="flex items-start gap-3 text-green-100 text-sm sm:text-base rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
             <svg class="w-5 h-5 text-green-300 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
             Saiba quais são as possibilidades
           </li>
-          <li class="flex items-start gap-3 text-green-100 text-sm">
+          <li class="flex items-start gap-3 text-green-100 text-sm sm:text-base rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
             <svg class="w-5 h-5 text-green-300 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
             Receba uma orientação clara
           </li>
         </ul>
+        </div>
       </div>
 
       <!-- Direita: formulário -->
       <div class="fade-up fade-up-d2">
-        <div class="bg-white rounded-2xl p-8 sm:p-10 shadow-2xl">
+        <div class="bg-white rounded-[1.75rem] p-6 sm:p-8 lg:p-10 shadow-[0_24px_70px_rgba(0,0,0,0.2)]">
 
-          <h3 class="font-headline font-bold text-grafite text-xl mb-1">
+          <h3 class="font-headline font-bold text-grafite text-xl sm:text-2xl mb-1">
             Agende sua avaliação
           </h3>
-          <p class="text-gray-400 text-sm mb-6">
+          <p class="text-gray-400 text-sm sm:text-base mb-6">
             Preencha seus dados para falar com a clínica.
           </p>
 
@@ -733,7 +822,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="space-y-4">
 
               <div>
-                <label class="block text-sm font-medium text-grafite mb-1.5 font-headline" for="nome">
+                <label class="block text-sm font-medium text-grafite mb-2 font-headline" for="nome">
                   Nome <span class="text-verde">*</span>
                 </label>
                 <input type="text" id="nome" name="nome"
@@ -743,7 +832,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </div>
 
               <div>
-                <label class="block text-sm font-medium text-grafite mb-1.5 font-headline" for="telefone">
+                <label class="block text-sm font-medium text-grafite mb-2 font-headline" for="telefone">
                   Telefone / WhatsApp <span class="text-verde">*</span>
                 </label>
                 <input type="tel" id="telefone" name="telefone"
@@ -768,7 +857,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <p class="text-gray-500 text-sm">Nossa equipe vai entrar em contato em breve pelo WhatsApp.</p>
           </div>
 
-          <p class="text-center text-xs text-gray-400 mt-5 flex items-center justify-center gap-1.5">
+          <p class="text-center text-xs sm:text-sm text-gray-400 mt-5 flex items-center justify-center gap-1.5 rounded-2xl bg-gray-50 px-4 py-3">
             <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
             </svg>
@@ -787,20 +876,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      RODAPÉ (não conta como dobra)
 ═══════════════════════════════════ -->
 <footer class="py-10 sm:py-12" style="background-color: #1f2937;">
-  <div class="max-w-6xl mx-auto px-5 sm:px-8">
+  <div class="max-w-6xl mx-auto px-4 sm:px-8">
 
     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8 mb-8">
 
       <!-- Logo -->
       <img src="logo_oral_sin.webp" alt="Oral Sin Implantes"
-           class="h-8 w-auto brightness-0 invert" />
+           class="h-8 w-auto" />
 
       <!-- Links -->
-      <nav class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-400" aria-label="Links do rodapé">
-        <a href="#hero"      class="hover:text-verde transition-colors">Início</a>
-        <a href="#beneficios" class="hover:text-verde transition-colors">Benefícios</a>
-        <a href="#objecoes"  class="hover:text-verde transition-colors">Dúvidas</a>
-        <a href="#formulario" class="hover:text-verde transition-colors">Agendar</a>
+      <nav class="flex flex-wrap gap-2 text-sm text-gray-300" aria-label="Links do rodapé">
+        <a href="#hero"      class="footer-nav-link hover:text-white transition-colors">Início</a>
+        <a href="#beneficios" class="footer-nav-link hover:text-white transition-colors">Benefícios</a>
+        <a href="#objecoes"  class="footer-nav-link hover:text-white transition-colors">Dúvidas</a>
+        <a href="#formulario" class="footer-nav-link footer-nav-link-cta hover:text-white transition-colors">Agendar</a>
       </nav>
 
     </div>
