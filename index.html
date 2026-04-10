@@ -23,31 +23,25 @@
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
-  <!-- Google Fonts -->
+  <!-- DNS Prefetch -->
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+  <link rel="dns-prefetch" href="https://lzzlxmymccqxrrmgfhob.supabase.co" />
+
+  <!-- Preload LCP image -->
+  <link rel="preload" as="image" href="hero-institucional.webp" fetchpriority="high" />
+
+  <!-- Google Fonts — não bloqueante, apenas pesos usados -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;500&display=swap"
+    onload="this.rel='stylesheet'" />
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;500&display=swap" />
+  </noscript>
 
-  <!-- Tailwind CSS via CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            verde:      { DEFAULT: '#0F6934', dark: '#0a4f26', light: '#e8f5ed', muted: '#d1ead9' },
-            offwhite:   '#F9F9F7',
-            cinzaclaro: '#F3F3F1',
-            grafite:    '#374151',
-          },
-          fontFamily: {
-            headline: ['Montserrat', 'sans-serif'],
-            body:     ['Inter', 'sans-serif'],
-          },
-        },
-      },
-    };
-  </script>
+  <!-- Tailwind CSS estático (purgado) -->
+  <link rel="stylesheet" href="tw.css" />
 
   <style>
     *, *::before, *::after { box-sizing: border-box; }
@@ -83,16 +77,18 @@
 
     /* ── Botões ─── */
     @keyframes btn-glow {
-      0%, 100% { box-shadow: 0 4px 18px rgba(15,105,52,0.25); }
-      50%       { box-shadow: 0 4px 28px rgba(15,105,52,0.55); }
+      0%, 100% { opacity: 0.35; }
+      50%       { opacity: 0.75; }
     }
     .btn-primary {
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      position: relative;
+      isolation: isolate;
       background: #0F6934;
       color: #fff;
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Montserrat', system-ui, sans-serif;
       font-weight: 700;
       padding: 1rem 2.25rem;
       border-radius: 50px;
@@ -101,8 +97,19 @@
       text-align: center;
       letter-spacing: 0.01em;
       text-decoration: none;
-      animation: btn-glow 3s ease-in-out infinite;
       transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 54px;
+      background: #0F6934;
+      filter: blur(10px);
+      opacity: 0.35;
+      z-index: -1;
+      animation: btn-glow 3s ease-in-out infinite;
+      pointer-events: none;
     }
     .btn-primary:hover {
       background: #0a4f26;
@@ -298,7 +305,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <header id="site-header" class="fixed top-0 left-0 right-0 z-50 bg-white/95 border-b border-black/5">
   <div class="max-w-6xl mx-auto px-4 sm:px-8 flex items-center justify-between h-16 sm:h-20 gap-4">
     <a href="#" aria-label="Oral Sin Implantes — início">
-      <img src="logo_oral_sin.webp" alt="Oral Sin Implantes" class="h-8 sm:h-10 w-auto" />
+      <img src="logo_oral_sin.webp" alt="Oral Sin Implantes" class="h-8 sm:h-10 w-auto" width="160" height="40" decoding="async" />
     </a>
     <a href="#formulario" class="btn-primary text-sm px-4 sm:px-5 py-2.5 whitespace-nowrap">Agendar avaliação</a>
   </div>
@@ -371,16 +378,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="fade-up fade-up-d2 flex flex-col items-center gap-4 order-2">
         <div class="relative w-full max-w-xl">
           <img
-            src="hero-institucional.png"
+            src="hero-institucional.webp"
             alt="Paciente sorrindo com dentista especialista em implantes na Oral Sin Londrina"
             class="w-full rounded-[1.5rem] shadow-[0_24px_60px_rgba(17,24,39,0.14)] object-cover"
             style="max-height: 460px; object-position: center top;"
+            width="1024" height="571"
+            fetchpriority="high" decoding="async"
           />
           <!-- Brasão integrado no canto da imagem -->
           <div class="absolute -bottom-4 right-4 sm:-bottom-5 sm:-right-5">
             <img src="Brasao-OS-1-1.webp"
                  alt="Oral Sin — Rede de Implantes Nº 1 do Brasil"
-                 class="w-20 sm:w-24 lg:w-28 drop-shadow-[0_14px_30px_rgba(17,24,39,0.25)]" />
+                 class="w-20 sm:w-24 lg:w-28 drop-shadow-[0_14px_30px_rgba(17,24,39,0.25)]"
+                 width="112" height="112" loading="lazy" decoding="async" />
           </div>
         </div>
       </div>
@@ -772,7 +782,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="fade-up">
         <div class="rounded-[1.75rem] border border-white/10 bg-white/5 backdrop-blur-sm p-6 sm:p-8 lg:p-9">
         <img src="logo_oral_sin.webp" alt="Oral Sin Implantes"
-             class="h-8 sm:h-10 w-auto mb-8" />
+             class="h-8 sm:h-10 w-auto mb-8" width="160" height="40" loading="lazy" decoding="async" />
 
         <h2 class="font-headline font-bold text-white text-2xl sm:text-3xl leading-tight mb-5">
           Está em tempo de resolver isso com segurança.
@@ -882,7 +892,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <!-- Logo -->
       <img src="logo_oral_sin.webp" alt="Oral Sin Implantes"
-           class="h-8 w-auto" />
+           class="h-8 w-auto" width="160" height="40" loading="lazy" decoding="async" />
 
       <!-- Links -->
       <nav class="flex flex-wrap gap-2 text-sm text-gray-300" aria-label="Links do rodapé">
