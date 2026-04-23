@@ -2,6 +2,65 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
+  <script>
+    document.documentElement.classList.add('js');
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+    window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
+
+    (function(f,b,e,v,n,t,s){
+      if (f.fbq) return;
+      n = f.fbq = function(){ n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); };
+      if (!f._fbq) f._fbq = n;
+      n.push = n;
+      n.loaded = true;
+      n.version = '2.0';
+      n.queue = [];
+
+      f.__loadThirdPartyTrackers = function() {
+        if (f.__thirdPartyTrackersLoaded) return;
+        f.__thirdPartyTrackersLoaded = true;
+
+        var firstScript = b.getElementsByTagName('script')[0];
+        var gtmScript = b.createElement('script');
+        var gtagScript = b.createElement('script');
+        var pixelScript = b.createElement(e);
+
+        gtmScript.async = true;
+        gtmScript.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-5R3636DX';
+
+        gtagScript.async = true;
+        gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-P2CW6RSZVG';
+
+        pixelScript.async = true;
+        pixelScript.src = v;
+
+        firstScript.parentNode.insertBefore(gtmScript, firstScript);
+        firstScript.parentNode.insertBefore(gtagScript, firstScript);
+        firstScript.parentNode.insertBefore(pixelScript, firstScript);
+      };
+    })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+
+    function scheduleThirdPartyTrackers() {
+      const run = () => window.__loadThirdPartyTrackers();
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(run, { timeout: 1800 });
+      } else {
+        window.addEventListener('load', run, { once: true });
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', scheduleThirdPartyTrackers, { once: true });
+  </script>
+
+  <script>
+    fbq('init', '352020864036621');
+    fbq('track', 'PageView');
+    fbq('track', 'ViewContent', {
+      content_name: 'Implante Dentário em Londrina',
+      content_category: 'Landing Page'
+    });
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- SEO Local -->
@@ -15,33 +74,47 @@
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
+  <link rel="preconnect" href="https://connect.facebook.net" />
+  <link rel="preconnect" href="https://www.facebook.com" />
 
-  <!-- Tailwind CSS via CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            verde:      { DEFAULT: '#0F6934', dark: '#0a4f26', light: '#e8f5ed', muted: '#d1ead9' },
-            offwhite:   '#F9F9F7',
-            cinzaclaro: '#F3F3F1',
-            grafite:    '#374151',
-          },
-          fontFamily: {
-            headline: ['Montserrat', 'sans-serif'],
-            body:     ['Inter', 'sans-serif'],
-          },
-        },
-      },
-    };
-  </script>
+  <!-- DNS Prefetch -->
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+  <link rel="dns-prefetch" href="https://connect.facebook.net" />
+  <link rel="dns-prefetch" href="https://www.facebook.com" />
+  <link rel="dns-prefetch" href="https://nnwb.voictech.com.br" />
+
+  <!-- Preload LCP -->
+  <link rel="preload" as="font" href="fonts/inter-latin.woff2" type="font/woff2" crossorigin />
+  <link rel="preload" as="font" href="fonts/montserrat-latin.woff2" type="font/woff2" crossorigin />
+  <link rel="preload" as="image"
+        href="hero-mobile.webp"
+        imagesrcset="hero-mobile.webp 640w, hero-institucional.webp 1024w"
+        imagesizes="100vw"
+        fetchpriority="high" />
 
   <style>
+    /* ── Fontes auto-hospedadas ── */
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 400 500;
+      font-display: swap;
+      src: url('fonts/inter-latin.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+FEFF, U+FFFD;
+    }
+    @font-face {
+      font-family: 'Montserrat';
+      font-style: normal;
+      font-weight: 600 700;
+      font-display: swap;
+      src: url('fonts/montserrat-latin.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+FEFF, U+FFFD;
+    }
+    /* ── Tailwind CSS (purgado, inline) ── */
+    *,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.19 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.visible{visibility:visible}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.inset-y-0{top:0;bottom:0}.-bottom-4{bottom:-1rem}.left-0{left:0}.right-0{right:0}.right-4{right:1rem}.top-0{top:0}.-z-0{z-index:0}.z-10{z-index:10}.z-50{z-index:50}.order-1{order:1}.order-2{order:2}.mx-auto{margin-left:auto;margin-right:auto}.mb-1{margin-bottom:.25rem}.mb-10{margin-bottom:2.5rem}.mb-2{margin-bottom:.5rem}.mb-3{margin-bottom:.75rem}.mb-4{margin-bottom:1rem}.mb-5{margin-bottom:1.25rem}.mb-6{margin-bottom:1.5rem}.mb-7{margin-bottom:1.75rem}.mb-8{margin-bottom:2rem}.mt-0\.5{margin-top:.125rem}.mt-1{margin-top:.25rem}.mt-10{margin-top:2.5rem}.mt-2{margin-top:.5rem}.mt-5{margin-top:1.25rem}.mt-7{margin-top:1.75rem}.block{display:block}.inline-block{display:inline-block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.h-10{height:2.5rem}.h-12{height:3rem}.h-16{height:4rem}.h-3{height:.75rem}.h-3\.5{height:.875rem}.h-5{height:1.25rem}.h-8{height:2rem}.w-10{width:2.5rem}.w-12{width:3rem}.w-2\/5{width:40%}.w-20{width:5rem}.w-3{width:.75rem}.w-3\.5{width:.875rem}.w-5{width:1.25rem}.w-auto{width:auto}.w-full{width:100%}.max-w-2xl{max-width:42rem}.max-w-4xl{max-width:56rem}.max-w-5xl{max-width:64rem}.max-w-6xl{max-width:72rem}.max-w-xl{max-width:36rem}.flex-shrink-0{flex-shrink:0}.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1\.5{gap:.375rem}.gap-2{gap:.5rem}.gap-2\.5{gap:.625rem}.gap-3{gap:.75rem}.gap-3\.5{gap:.875rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.gap-8{gap:2rem}.space-y-1\.5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.375rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.375rem*var(--tw-space-y-reverse))}.space-y-3>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.75rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.75rem*var(--tw-space-y-reverse))}.space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem*var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.whitespace-nowrap{white-space:nowrap}.rounded-2xl{border-radius:1rem}.rounded-\[1\.5rem\]{border-radius:1.5rem}.rounded-\[1\.75rem\]{border-radius:1.75rem}.rounded-full{border-radius:9999px}.rounded-xl{border-radius:.75rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-t{border-top-width:1px}.border-black\/5{border-color:rgba(0,0,0,.05)}.border-gray-700{--tw-border-opacity:1;border-color:rgb(55 65 81/var(--tw-border-opacity,1))}.border-white\/10{border-color:hsla(0,0%,100%,.1)}.bg-gray-50{--tw-bg-opacity:1;background-color:rgb(249 250 251/var(--tw-bg-opacity,1))}.bg-offwhite{--tw-bg-opacity:1;background-color:rgb(249 249 247/var(--tw-bg-opacity,1))}.bg-verde{--tw-bg-opacity:1;background-color:rgb(15 105 52/var(--tw-bg-opacity,1))}.bg-verde-light{--tw-bg-opacity:1;background-color:rgb(232 245 237/var(--tw-bg-opacity,1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255/var(--tw-bg-opacity,1))}.bg-white\/5{background-color:hsla(0,0%,100%,.05)}.bg-white\/95{background-color:hsla(0,0%,100%,.95)}.object-cover{-o-object-fit:cover;object-fit:cover}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.px-0{padding-left:0;padding-right:0}.px-3{padding-left:.75rem;padding-right:.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-1\.5{padding-top:.375rem;padding-bottom:.375rem}.py-10{padding-top:2.5rem;padding-bottom:2.5rem}.py-16{padding-top:4rem;padding-bottom:4rem}.py-2\.5{padding-top:.625rem;padding-bottom:.625rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.py-4{padding-top:1rem;padding-bottom:1rem}.py-5{padding-top:1.25rem;padding-bottom:1.25rem}.py-8{padding-top:2rem;padding-bottom:2rem}.pb-16{padding-bottom:4rem}.pb-5{padding-bottom:1.25rem}.pr-4{padding-right:1rem}.pt-24{padding-top:6rem}.pt-7{padding-top:1.75rem}.text-left{text-align:left}.text-center{text-align:center}.font-headline{font-family:Montserrat,system-ui,sans-serif}.text-2xl{font-size:1.5rem;line-height:2rem}.text-\[0\.7rem\]{font-size:.7rem}.text-\[1rem\],.text-base{font-size:1rem}.text-base{line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:.75rem;line-height:1rem}.font-bold{font-weight:700}.font-medium{font-weight:500}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.italic{font-style:italic}.leading-\[1\.03\]{line-height:1.03}.leading-relaxed{line-height:1.625}.leading-snug{line-height:1.375}.leading-tight{line-height:1.25}.tracking-\[0\.24em\]{letter-spacing:.24em}.tracking-tight{letter-spacing:-.025em}.tracking-wider{letter-spacing:.05em}.text-grafite{--tw-text-opacity:1;color:rgb(55 65 81/var(--tw-text-opacity,1))}.text-gray-300{--tw-text-opacity:1;color:rgb(209 213 219/var(--tw-text-opacity,1))}.text-gray-400{--tw-text-opacity:1;color:rgb(156 163 175/var(--tw-text-opacity,1))}.text-gray-500{--tw-text-opacity:1;color:rgb(107 114 128/var(--tw-text-opacity,1))}.text-gray-600{--tw-text-opacity:1;color:rgb(75 85 99/var(--tw-text-opacity,1))}.text-green-100{--tw-text-opacity:1;color:rgb(220 252 231/var(--tw-text-opacity,1))}.text-green-300{--tw-text-opacity:1;color:rgb(134 239 172/var(--tw-text-opacity,1))}.text-red-500{--tw-text-opacity:1;color:rgb(239 68 68/var(--tw-text-opacity,1))}.text-verde{--tw-text-opacity:1;color:rgb(15 105 52/var(--tw-text-opacity,1))}.text-verde\/80{color:rgba(15,105,52,.8)}.text-white{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity,1))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.opacity-25{opacity:.25}.shadow{--tw-shadow:0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px -1px rgba(0,0,0,.1);--tw-shadow-colored:0 1px 3px 0 var(--tw-shadow-color),0 1px 2px -1px var(--tw-shadow-color)}.shadow,.shadow-\[0_24px_60px_rgba\(17\2c 24\2c 39\2c 0\.14\)\]{box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.shadow-\[0_24px_60px_rgba\(17\2c 24\2c 39\2c 0\.14\)\]{--tw-shadow:0 24px 60px rgba(17,24,39,.14);--tw-shadow-colored:0 24px 60px var(--tw-shadow-color)}.shadow-\[0_24px_70px_rgba\(0\2c 0\2c 0\2c 0\.2\)\]{--tw-shadow:0 24px 70px rgba(0,0,0,.2);--tw-shadow-colored:0 24px 70px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.outline{outline-style:solid}.blur{--tw-blur:blur(8px)}.blur,.drop-shadow-\[0_14px_30px_rgba\(17\2c 24\2c 39\2c 0\.25\)\]{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.drop-shadow-\[0_14px_30px_rgba\(17\2c 24\2c 39\2c 0\.25\)\]{--tw-drop-shadow:drop-shadow(0 14px 30px rgba(17,24,39,.25))}.backdrop-blur-sm{--tw-backdrop-blur:blur(4px)}.backdrop-blur-sm,.backdrop-filter{-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition-colors{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.ease-in-out{transition-timing-function:cubic-bezier(.4,0,.2,1)}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity,1))}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}@media (min-width:640px){.sm\:-bottom-5{bottom:-1.25rem}.sm\:-right-5{right:-1.25rem}.sm\:col-span-2{grid-column:span 2/span 2}.sm\:mx-auto{margin-left:auto;margin-right:auto}.sm\:mb-10{margin-bottom:2.5rem}.sm\:mb-5{margin-bottom:1.25rem}.sm\:mb-7{margin-bottom:1.75rem}.sm\:mb-8{margin-bottom:2rem}.sm\:mt-12{margin-top:3rem}.sm\:h-10{height:2.5rem}.sm\:h-20{height:5rem}.sm\:w-24{width:6rem}.sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.sm\:flex-row{flex-direction:row}.sm\:items-center{align-items:center}.sm\:gap-10{gap:2.5rem}.sm\:gap-12{gap:3rem}.sm\:gap-3{gap:.75rem}.sm\:gap-4{gap:1rem}.sm\:gap-5{gap:1.25rem}.sm\:p-10{padding:2.5rem}.sm\:p-6{padding:1.5rem}.sm\:p-7{padding:1.75rem}.sm\:p-8{padding:2rem}.sm\:px-2{padding-left:.5rem;padding-right:.5rem}.sm\:px-5{padding-left:1.25rem;padding-right:1.25rem}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:px-7{padding-left:1.75rem;padding-right:1.75rem}.sm\:px-8{padding-left:2rem;padding-right:2rem}.sm\:py-12{padding-top:3rem;padding-bottom:3rem}.sm\:py-24{padding-top:6rem;padding-bottom:6rem}.sm\:py-6{padding-top:1.5rem;padding-bottom:1.5rem}.sm\:pb-24{padding-bottom:6rem}.sm\:pb-6{padding-bottom:1.5rem}.sm\:pt-32{padding-top:8rem}.sm\:text-center{text-align:center}.sm\:text-2xl{font-size:1.5rem;line-height:2rem}.sm\:text-3xl{font-size:1.875rem;line-height:2.25rem}.sm\:text-base{font-size:1rem;line-height:1.5rem}.sm\:text-lg{font-size:1.125rem;line-height:1.75rem}.sm\:text-sm{font-size:.875rem;line-height:1.25rem}.sm\:text-xl{font-size:1.25rem;line-height:1.75rem}.sm\:text-xs{font-size:.75rem;line-height:1rem}}@media (min-width:1024px){.lg\:col-span-1{grid-column:span 1/span 1}.lg\:block{display:block}.lg\:w-28{width:7rem}.lg\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.lg\:grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}.lg\:grid-cols-\[minmax\(0\2c 0\.95fr\)_minmax\(0\2c 1\.05fr\)\]{grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr)}.lg\:grid-cols-\[minmax\(0\2c 1\.05fr\)_minmax\(0\2c 0\.95fr\)\]{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)}.lg\:gap-14{gap:3.5rem}.lg\:p-10{padding:2.5rem}.lg\:p-12{padding:3rem}.lg\:p-9{padding:2.25rem}.lg\:px-6{padding-left:1.5rem;padding-right:1.5rem}.lg\:text-2xl{font-size:1.5rem;line-height:2rem}}
+    /* ── Custom CSS ── */
     *, *::before, *::after { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
@@ -50,19 +123,41 @@
       color: #374151;
       -webkit-font-smoothing: antialiased;
     }
+    section { position: relative; }
+
+    @supports (content-visibility: auto) {
+      .deferred-section {
+        content-visibility: auto;
+        contain-intrinsic-size: 1px 960px;
+      }
+    }
 
     /* ── Fade-in ─── */
     .fade-up {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .js .fade-up:not(.above-fold) {
       opacity: 0;
       transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      transition: opacity 0.45s ease, transform 0.45s ease;
     }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .js .fade-up.visible,
+    .fade-up.above-fold { opacity: 1; transform: translateY(0); }
     .fade-up-d1 { transition-delay: 0.1s; }
     .fade-up-d2 { transition-delay: 0.2s; }
     .fade-up-d3 { transition-delay: 0.3s; }
     .fade-up-d4 { transition-delay: 0.4s; }
     .fade-up-d5 { transition-delay: 0.5s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .js .fade-up:not(.above-fold) {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
 
     /* ── Header ─── */
     #site-header { transition: box-shadow 0.3s ease; }
@@ -73,28 +168,52 @@
     }
 
     /* ── Botões ─── */
+    @keyframes btn-glow {
+      0%, 100% { opacity: 0.35; }
+      50%       { opacity: 0.75; }
+    }
     .btn-primary {
-      display: inline-block;
-      background-color: #0F6934;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      isolation: isolate;
+      background: #0F6934;
       color: #fff;
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Montserrat', system-ui, sans-serif;
       font-weight: 700;
       padding: 1rem 2.25rem;
-      border-radius: 0.5rem;
+      border-radius: 50px;
       border: none;
       cursor: pointer;
       text-align: center;
       letter-spacing: 0.01em;
-      transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 54px;
+      background: #0F6934;
+      filter: blur(10px);
+      opacity: 0.35;
+      z-index: -1;
+      animation: btn-glow 3s ease-in-out infinite;
+      pointer-events: none;
     }
     .btn-primary:hover {
-      background-color: #0a4f26;
+      background: #0a4f26;
       transform: translateY(-1px);
-      box-shadow: 0 8px 24px rgba(15,105,52,0.25);
     }
     .btn-primary-lg {
       padding: 1.125rem 2.75rem;
       font-size: 1.0625rem;
+    }
+    .btn-block-mobile {
+      width: 100%;
+      justify-content: center;
     }
 
     /* ── Cards ─── */
@@ -105,6 +224,44 @@
       transition: box-shadow 0.25s ease, transform 0.25s ease;
     }
     .card:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.09); transform: translateY(-2px); }
+    .section-card {
+      border-radius: 1.5rem;
+      border: 1px solid rgba(15, 105, 52, 0.08);
+      box-shadow: 0 16px 40px rgba(17, 24, 39, 0.06);
+    }
+    .chip-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 0.875rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(17, 24, 39, 0.08);
+      background: rgba(255,255,255,0.92);
+      box-shadow: 0 8px 20px rgba(17, 24, 39, 0.05);
+    }
+    .tone-soft {
+      background: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(249,249,247,0.96) 100%);
+    }
+    .tone-muted {
+      background: linear-gradient(180deg, #eef2ee 0%, #f4f3ef 100%);
+    }
+    .tone-contrast {
+      background: linear-gradient(180deg, #ffffff 0%, #eef7f1 100%);
+    }
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.85rem;
+      border-radius: 9999px;
+      background: rgba(15, 105, 52, 0.08);
+      color: #0F6934;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
 
     /* ── Accordion ─── */
     .acc-content {
@@ -112,18 +269,19 @@
       overflow: hidden;
       transition: max-height 0.38s ease;
     }
-    .acc-content.open { max-height: 240px; }
+    .acc-content.open { max-height: 320px; }
     .acc-icon { transition: transform 0.3s ease; }
     .acc-item.active .acc-icon { transform: rotate(45deg); }
 
     /* ── Formulário ─── */
     .form-input {
       width: 100%;
-      padding: 0.875rem 1rem;
+      min-height: 3.5rem;
+      padding: 1rem 1rem;
       border: 1.5px solid #e5e7eb;
-      border-radius: 0.5rem;
+      border-radius: 0.9rem;
       font-family: 'Inter', sans-serif;
-      font-size: 0.9375rem;
+      font-size: 1rem;
       color: #374151;
       background: #fff;
       outline: none;
@@ -164,25 +322,103 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
+    .hero-panel {
+      border-radius: 1.75rem;
+      background: linear-gradient(180deg, rgba(255,255,255,0.97) 0%, rgba(255,255,255,0.9) 100%);
+      border: 1px solid rgba(15, 105, 52, 0.08);
+      box-shadow: 0 18px 40px rgba(17, 24, 39, 0.08);
+    }
+    .quote-panel {
+      border-radius: 1.25rem;
+      background: #ffffff;
+      border: 1px solid rgba(15, 105, 52, 0.1);
+      box-shadow: 0 12px 26px rgba(17, 24, 39, 0.05);
+    }
+    .benefit-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .benefit-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 4px;
+      background: linear-gradient(180deg, #0F6934 0%, #31a05a 100%);
+    }
+    .footer-nav-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.75rem;
+      padding: 0.7rem 1rem;
+      border-radius: 9999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer-nav-link-cta {
+      background: #0F6934;
+      color: #fff;
+      border-color: rgba(15,105,52,0.5);
+      box-shadow: 0 10px 24px rgba(15,105,52,0.3);
+    }
+    @media (min-width: 640px) {
+      .btn-block-mobile { width: auto; }
+    }
+    @media (max-width: 639px) {
+      .section-card { border-radius: 1.25rem; }
+    }
 
     /* ── Scrollbar ─── */
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: #F3F3F1; }
     ::-webkit-scrollbar-thumb { background: #0F6934; border-radius: 3px; }
   </style>
+
+  <script>
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-P2CW6RSZVG');
+    gtag('config', 'AW-10975665738');
+
+    function gtag_report_conversion(url) {
+      var callback = function () {
+        if (typeof(url) != 'undefined') {
+          window.location = url;
+        }
+      };
+
+      gtag('event', 'conversion', {
+        'send_to': 'AW-10975665738/WYCZCJafzuAYEMq8zfEo',
+        'event_callback': callback
+      });
+
+      return false;
+    }
+  </script>
 </head>
 
 <body class="bg-offwhite">
 
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5R3636DX"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- Meta Pixel (noscript) -->
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=352020864036621&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel (noscript) -->
+
 <!-- ═══════════════════════════════════
      HEADER (não conta como dobra)
 ═══════════════════════════════════ -->
-<header id="site-header" class="fixed top-0 left-0 right-0 z-50 bg-white">
-  <div class="max-w-6xl mx-auto px-5 sm:px-8 flex items-center justify-between h-16 sm:h-20">
+<header id="site-header" class="fixed top-0 left-0 right-0 z-50 bg-white/95 border-b border-black/5">
+  <div class="max-w-6xl mx-auto px-4 sm:px-8 flex items-center justify-between h-16 sm:h-20 gap-4">
     <a href="#" aria-label="Oral Sin Implantes — início">
-      <img src="logo_oral_sin.webp" alt="Oral Sin Implantes" class="h-8 sm:h-10 w-auto" />
+      <img src="logo_oral_sin.webp" alt="Oral Sin Implantes" class="h-8 sm:h-10 w-auto" width="160" height="40" decoding="async" />
     </a>
-    <a href="#formulario" class="btn-primary text-sm px-5 py-2.5">Agendar avaliação</a>
+    <a href="#formulario" class="btn-primary text-sm px-4 sm:px-5 py-2.5 whitespace-nowrap">Agendar avaliação</a>
   </div>
 </header>
 
@@ -190,75 +426,84 @@
 <!-- ═══════════════════════════════════
      DOBRA 1 — Hero
 ═══════════════════════════════════ -->
-<section id="hero" class="pt-24 sm:pt-32 pb-14 sm:pb-20 bg-offwhite relative overflow-hidden">
+<section id="hero" class="pt-24 sm:pt-32 pb-16 sm:pb-24 bg-offwhite relative overflow-hidden">
 
   <!-- Detalhe verde sutil -->
   <div class="absolute inset-y-0 right-0 w-2/5 bg-verde-light opacity-25 -z-0 hidden lg:block"
        style="clip-path: ellipse(85% 100% at 95% 50%);"></div>
 
-  <div class="relative z-10 max-w-6xl mx-auto px-5 sm:px-8">
-    <div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+  <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-8">
+    <div class="grid lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] gap-6 sm:gap-10 lg:gap-14 items-center">
 
       <!-- Esquerda: copy -->
-      <div class="fade-up">
-        <span class="inline-block text-xs font-semibold tracking-widest uppercase text-verde bg-verde-light px-3 py-1 rounded-full mb-5 font-headline">
-          Londrina / PR
-        </span>
+      <div class="fade-up above-fold order-1">
+        <div class="hero-panel p-6 sm:p-8 lg:p-10">
+          <span class="inline-flex text-[0.7rem] sm:text-xs font-semibold tracking-[0.24em] uppercase text-verde/80 bg-verde-light px-3 py-1.5 rounded-full mb-4 sm:mb-5 font-headline">
+            Londrina / PR
+          </span>
 
-        <h1 class="font-headline font-bold text-grafite leading-tight mb-4"
-            style="font-size: clamp(1.9rem, 4vw, 3rem);">
-          Implante Dentário<br/>
-          <span class="text-verde-grad">em Londrina</span>
-        </h1>
+          <h1 class="font-headline font-bold text-grafite leading-[1.03] tracking-tight mb-4"
+              style="font-size: clamp(2.1rem, 8vw, 3.8rem);">
+            Implante Dentário<br/>
+            <span class="text-verde-grad">em Londrina</span>
+          </h1>
 
-        <p class="font-headline font-semibold text-grafite text-lg sm:text-xl leading-snug mb-3">
-          Volte a mastigar, sorrir e falar com segurança.
-        </p>
+          <div class="max-w-xl">
+            <p class="font-headline font-semibold text-grafite text-lg sm:text-xl lg:text-2xl leading-snug mb-3">
+              Volte a mastigar, sorrir e falar com segurança.
+            </p>
 
-        <p class="text-gray-500 text-base leading-relaxed mb-8 max-w-md">
-          Tratamento com foco em firmeza, conforto e resultado natural.<br/>
-          Atendimento consultivo, avaliação cuidadosa e equipe especializada.
-        </p>
+            <p class="text-gray-500 text-[1rem] sm:text-lg leading-relaxed mb-7 sm:mb-8">
+              Tratamento com foco em firmeza, conforto e resultado natural.<br/>
+              Atendimento consultivo, avaliação cuidadosa e equipe especializada.
+            </p>
+          </div>
 
-        <a href="#formulario" class="btn-primary btn-primary-lg mb-8 inline-block">
-          Quero agendar minha avaliação
-        </a>
+          <a href="#formulario" class="btn-primary btn-primary-lg btn-block-mobile mb-7 sm:mb-8 inline-flex">
+            Quero agendar minha avaliação
+          </a>
 
-        <!-- Apoios -->
-        <div class="flex flex-wrap gap-2">
-          <span class="inline-flex items-center gap-1.5 text-xs font-medium text-grafite bg-white border border-gray-200 rounded-full px-3 py-1.5 shadow-sm">
+          <!-- Apoios -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
+            <span class="chip-card text-xs sm:text-sm font-medium text-grafite">
             <svg class="w-3 h-3 text-verde flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
             Especialistas em implante
           </span>
-          <span class="inline-flex items-center gap-1.5 text-xs font-medium text-grafite bg-white border border-gray-200 rounded-full px-3 py-1.5 shadow-sm">
+          <span class="chip-card text-xs sm:text-sm font-medium text-grafite">
             <svg class="w-3 h-3 text-verde flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
             Explicação clara
           </span>
-          <span class="inline-flex items-center gap-1.5 text-xs font-medium text-grafite bg-white border border-gray-200 rounded-full px-3 py-1.5 shadow-sm">
+          <span class="chip-card text-xs sm:text-sm font-medium text-grafite">
             <svg class="w-3 h-3 text-verde flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
             Avaliação individual
           </span>
-          <span class="inline-flex items-center gap-1.5 text-xs font-medium text-grafite bg-white border border-gray-200 rounded-full px-3 py-1.5 shadow-sm">
+          <span class="chip-card text-xs sm:text-sm font-medium text-grafite">
             <svg class="w-3 h-3 text-verde flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
             Condições de pagamento
           </span>
+          </div>
         </div>
       </div>
 
       <!-- Direita: imagem + brasão integrado -->
-      <div class="fade-up fade-up-d2 flex flex-col items-center gap-5">
-        <div class="relative w-full">
+      <div class="fade-up above-fold flex flex-col items-center gap-4 order-2">
+        <div class="relative w-full max-w-xl">
           <img
-            src="hero-institucional.png"
+            src="hero-institucional.webp"
+            srcset="hero-mobile.webp 640w, hero-institucional.webp 1024w"
+            sizes="(max-width: 640px) 100vw, 1024px"
             alt="Paciente sorrindo com dentista especialista em implantes na Oral Sin Londrina"
-            class="w-full rounded-xl shadow-lg object-cover"
-            style="max-height: 440px; object-position: center top;"
+            class="w-full rounded-[1.5rem] shadow-[0_24px_60px_rgba(17,24,39,0.14)] object-cover"
+            style="max-height: 460px; object-position: center top;"
+            width="1024" height="571"
+            fetchpriority="high" loading="eager" decoding="async"
           />
           <!-- Brasão integrado no canto da imagem -->
-          <div class="absolute -bottom-5 -right-3 sm:-right-5">
+          <div class="absolute -bottom-4 right-4 sm:-bottom-5 sm:-right-5">
             <img src="Brasao-OS-1-1.webp"
                  alt="Oral Sin — Rede de Implantes Nº 1 do Brasil"
-                 class="w-24 sm:w-28 drop-shadow-md" />
+                 class="w-20 sm:w-24 lg:w-28 drop-shadow-[0_14px_30px_rgba(17,24,39,0.25)]"
+                 width="112" height="112" loading="lazy" decoding="async" />
           </div>
         </div>
       </div>
@@ -271,10 +516,11 @@
 <!-- ═══════════════════════════════════
      DOBRA 2 — Dor da persona
 ═══════════════════════════════════ -->
-<section id="dor" class="py-14 sm:py-20 bg-cinzaclaro">
-  <div class="max-w-5xl mx-auto px-5 sm:px-8">
+<section id="dor" class="deferred-section py-16 sm:py-24 tone-muted">
+  <div class="max-w-5xl mx-auto px-4 sm:px-8">
+    <div class="section-card px-5 py-8 sm:p-10 lg:p-12">
 
-    <div class="text-center mb-10 fade-up">
+    <div class="text-center mb-8 sm:mb-10 fade-up">
       <div class="sec-line"></div>
       <h2 class="font-headline font-bold text-2xl sm:text-3xl text-grafite mb-2">
         Perdeu dentes ou sofre com dentadura solta?
@@ -285,64 +531,64 @@
     </div>
 
     <!-- Cards de dor -->
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-10">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 sm:gap-4 mb-8 sm:mb-10">
 
-      <div class="card p-5 text-center fade-up fade-up-d1">
-        <div class="w-10 h-10 rounded-xl bg-verde-light flex items-center justify-center mx-auto mb-3">
+      <div class="card p-5 sm:p-6 text-left sm:text-center fade-up fade-up-d1">
+        <div class="w-10 h-10 rounded-xl bg-verde-light flex items-center justify-center sm:mx-auto mb-3">
           <svg class="w-5 h-5 text-verde" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
             <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/>
           </svg>
         </div>
-        <p class="font-headline font-semibold text-grafite text-xs leading-snug">Dificulta para mastigar</p>
+        <p class="font-headline font-semibold text-grafite text-sm leading-snug">Dificulta para mastigar</p>
       </div>
 
-      <div class="card p-5 text-center fade-up fade-up-d2">
-        <div class="w-10 h-10 rounded-xl bg-verde-light flex items-center justify-center mx-auto mb-3">
+      <div class="card p-5 sm:p-6 text-left sm:text-center fade-up fade-up-d2">
+        <div class="w-10 h-10 rounded-xl bg-verde-light flex items-center justify-center sm:mx-auto mb-3">
           <svg class="w-5 h-5 text-verde" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
             <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
           </svg>
         </div>
-        <p class="font-headline font-semibold text-grafite text-xs leading-snug">Insegurança para falar</p>
+        <p class="font-headline font-semibold text-grafite text-sm leading-snug">Insegurança para falar</p>
       </div>
 
-      <div class="card p-5 text-center fade-up fade-up-d3">
-        <div class="w-10 h-10 rounded-xl bg-verde-light flex items-center justify-center mx-auto mb-3">
+      <div class="card p-5 sm:p-6 text-left sm:text-center fade-up fade-up-d3">
+        <div class="w-10 h-10 rounded-xl bg-verde-light flex items-center justify-center sm:mx-auto mb-3">
           <svg class="w-5 h-5 text-verde" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
             <path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
           </svg>
         </div>
-        <p class="font-headline font-semibold text-grafite text-xs leading-snug">Vergonha nas fotos</p>
+        <p class="font-headline font-semibold text-grafite text-sm leading-snug">Vergonha nas fotos</p>
       </div>
 
-      <div class="card p-5 text-center fade-up fade-up-d4">
-        <div class="w-10 h-10 rounded-xl bg-verde-light flex items-center justify-center mx-auto mb-3">
+      <div class="card p-5 sm:p-6 text-left sm:text-center fade-up fade-up-d4">
+        <div class="w-10 h-10 rounded-xl bg-verde-light flex items-center justify-center sm:mx-auto mb-3">
           <svg class="w-5 h-5 text-verde" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
           </svg>
         </div>
-        <p class="font-headline font-semibold text-grafite text-xs leading-snug">Desconforto no dia a dia</p>
+        <p class="font-headline font-semibold text-grafite text-sm leading-snug">Desconforto no dia a dia</p>
       </div>
 
-      <div class="card p-5 text-center fade-up fade-up-d5 col-span-2 sm:col-span-1">
-        <div class="w-10 h-10 rounded-xl bg-verde-light flex items-center justify-center mx-auto mb-3">
+      <div class="card p-5 sm:p-6 text-left sm:text-center fade-up fade-up-d5 sm:col-span-2 lg:col-span-1">
+        <div class="w-10 h-10 rounded-xl bg-verde-light flex items-center justify-center sm:mx-auto mb-3">
           <svg class="w-5 h-5 text-verde" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
             <path stroke-linecap="round" stroke-linejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
           </svg>
         </div>
-        <p class="font-headline font-semibold text-grafite text-xs leading-snug">Medo de sorrir naturalmente</p>
+        <p class="font-headline font-semibold text-grafite text-sm leading-snug">Medo de sorrir naturalmente</p>
       </div>
 
     </div>
 
     <!-- Texto + frase de apoio -->
     <div class="max-w-2xl mx-auto text-center fade-up">
-      <p class="text-gray-500 text-base leading-relaxed mb-6">
+      <p class="text-gray-500 text-base sm:text-lg leading-relaxed mb-6 sm:mb-7">
         Muita gente convive com isso por anos.<br/>
         Não porque quer.<br/>
         Mas por medo, insegurança e receio de investir errado.
       </p>
-      <div class="inline-block bg-white border-l-4 border-verde rounded-lg px-7 py-5 text-left shadow-sm">
+      <div class="quote-panel inline-block px-6 py-5 sm:px-7 sm:py-6 text-left">
         <p class="font-headline font-semibold text-grafite text-base sm:text-lg">
           "Você não precisa continuar adiando uma solução importante."
         </p>
@@ -350,14 +596,16 @@
     </div>
 
   </div>
+  </div>
 </section>
 
 
 <!-- ═══════════════════════════════════
      DOBRA 3 — O que a pessoa compra
 ═══════════════════════════════════ -->
-<section id="beneficios" class="py-14 sm:py-20 bg-offwhite">
-  <div class="max-w-5xl mx-auto px-5 sm:px-8">
+<section id="beneficios" class="deferred-section py-16 sm:py-24 tone-contrast">
+  <div class="max-w-5xl mx-auto px-4 sm:px-8">
+    <div class="px-0 sm:px-2 lg:px-6">
 
     <div class="text-center mb-3 fade-up">
       <div class="sec-line"></div>
@@ -367,67 +615,68 @@
       <p class="font-headline font-semibold text-verde text-lg sm:text-xl mb-4">
         É voltar a viver com mais segurança.
       </p>
-      <p class="text-gray-500 text-base mb-10">
+      <p class="text-gray-500 text-base sm:text-lg mb-10">
         Com o implante dentário, o objetivo é recuperar:
       </p>
     </div>
 
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 mb-10">
 
-      <div class="card p-6 fade-up fade-up-d1">
+      <div class="card benefit-card p-6 sm:p-7 fade-up fade-up-d1">
         <div class="w-10 h-10 rounded-xl bg-verde flex items-center justify-center mb-4">
           <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
           </svg>
         </div>
-        <p class="font-headline font-semibold text-grafite text-sm">Firmeza para mastigar</p>
+        <p class="font-headline font-semibold text-grafite text-base leading-snug">Firmeza para mastigar</p>
       </div>
 
-      <div class="card p-6 fade-up fade-up-d2">
+      <div class="card benefit-card p-6 sm:p-7 fade-up fade-up-d2">
         <div class="w-10 h-10 rounded-xl bg-verde flex items-center justify-center mb-4">
           <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
           </svg>
         </div>
-        <p class="font-headline font-semibold text-grafite text-sm">Segurança para sorrir</p>
+        <p class="font-headline font-semibold text-grafite text-base leading-snug">Segurança para sorrir</p>
       </div>
 
-      <div class="card p-6 fade-up fade-up-d3">
+      <div class="card benefit-card p-6 sm:p-7 fade-up fade-up-d3">
         <div class="w-10 h-10 rounded-xl bg-verde flex items-center justify-center mb-4">
           <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
           </svg>
         </div>
-        <p class="font-headline font-semibold text-grafite text-sm">Confiança para falar</p>
+        <p class="font-headline font-semibold text-grafite text-base leading-snug">Confiança para falar</p>
       </div>
 
-      <div class="card p-6 fade-up fade-up-d2">
+      <div class="card benefit-card p-6 sm:p-7 fade-up fade-up-d2">
         <div class="w-10 h-10 rounded-xl bg-verde flex items-center justify-center mb-4">
           <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
           </svg>
         </div>
-        <p class="font-headline font-semibold text-grafite text-sm">Conforto no dia a dia</p>
+        <p class="font-headline font-semibold text-grafite text-base leading-snug">Conforto no dia a dia</p>
       </div>
 
-      <div class="card p-6 fade-up fade-up-d3">
+      <div class="card benefit-card p-6 sm:p-7 fade-up fade-up-d3 sm:col-span-2 lg:col-span-1">
         <div class="w-10 h-10 rounded-xl bg-verde flex items-center justify-center mb-4">
           <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
           </svg>
         </div>
-        <p class="font-headline font-semibold text-grafite text-sm">Naturalidade no convívio social</p>
+        <p class="font-headline font-semibold text-grafite text-base leading-snug">Naturalidade no convívio social</p>
       </div>
 
     </div>
 
     <div class="text-center fade-up">
-      <p class="text-gray-500 text-sm mb-7 italic">Mais do que dentes, é qualidade de vida.</p>
-      <a href="#formulario" class="btn-primary btn-primary-lg">
+      <p class="text-gray-500 text-base sm:text-lg mb-7 italic">Mais do que dentes, é qualidade de vida.</p>
+      <a href="#formulario" class="btn-primary btn-primary-lg btn-block-mobile inline-flex">
         Quero entender meu caso
       </a>
     </div>
 
+  </div>
   </div>
 </section>
 
@@ -435,8 +684,9 @@
 <!-- ═══════════════════════════════════
      DOBRA 4 — Quebra de objeções
 ═══════════════════════════════════ -->
-<section id="objecoes" class="py-14 sm:py-20 bg-cinzaclaro">
-  <div class="max-w-3xl mx-auto px-5 sm:px-8">
+<section id="objecoes" class="deferred-section py-16 sm:py-24 tone-soft">
+  <div class="max-w-4xl mx-auto px-4 sm:px-8">
+    <div class="section-card bg-white px-5 py-8 sm:p-10 lg:p-12">
 
     <div class="text-center mb-10 fade-up">
       <div class="sec-line"></div>
@@ -445,88 +695,88 @@
       </h2>
     </div>
 
-    <div class="space-y-3 fade-up" id="accordion">
+    <div class="space-y-4 fade-up" id="accordion">
 
       <!-- Objeção 1 -->
-      <div class="card acc-item overflow-hidden">
-        <button class="acc-trigger w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none" aria-expanded="false">
-          <span class="font-headline font-semibold text-grafite text-sm sm:text-base pr-4">
+      <div class="card acc-item overflow-hidden border border-black/5">
+        <button class="acc-trigger w-full flex items-center justify-between px-5 sm:px-6 py-5 sm:py-6 text-left focus:outline-none" aria-expanded="false">
+          <span class="font-headline font-semibold text-grafite text-base sm:text-lg pr-4 leading-snug">
             "Tenho medo de sentir dor."
           </span>
           <svg class="acc-icon w-5 h-5 text-verde flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
           </svg>
         </button>
-        <div class="acc-content px-6 pb-5">
-          <p class="text-gray-500 text-sm leading-relaxed">
+        <div class="acc-content px-5 sm:px-6 pb-5 sm:pb-6">
+          <p class="text-gray-500 text-sm sm:text-base leading-relaxed">
             Cada caso é avaliado com cuidado. Você recebe orientação clara em cada etapa — antes, durante e depois do tratamento.
           </p>
         </div>
       </div>
 
       <!-- Objeção 2 -->
-      <div class="card acc-item overflow-hidden">
-        <button class="acc-trigger w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none" aria-expanded="false">
-          <span class="font-headline font-semibold text-grafite text-sm sm:text-base pr-4">
+      <div class="card acc-item overflow-hidden border border-black/5">
+        <button class="acc-trigger w-full flex items-center justify-between px-5 sm:px-6 py-5 sm:py-6 text-left focus:outline-none" aria-expanded="false">
+          <span class="font-headline font-semibold text-grafite text-base sm:text-lg pr-4 leading-snug">
             "Tenho medo da cirurgia."
           </span>
           <svg class="acc-icon w-5 h-5 text-verde flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
           </svg>
         </button>
-        <div class="acc-content px-6 pb-5">
-          <p class="text-gray-500 text-sm leading-relaxed">
+        <div class="acc-content px-5 sm:px-6 pb-5 sm:pb-6">
+          <p class="text-gray-500 text-sm sm:text-base leading-relaxed">
             O tratamento é explicado com simplicidade, sem pressão e sem surpresa. Nada é feito sem que você entenda e concorde com cada passo.
           </p>
         </div>
       </div>
 
       <!-- Objeção 3 -->
-      <div class="card acc-item overflow-hidden">
-        <button class="acc-trigger w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none" aria-expanded="false">
-          <span class="font-headline font-semibold text-grafite text-sm sm:text-base pr-4">
+      <div class="card acc-item overflow-hidden border border-black/5">
+        <button class="acc-trigger w-full flex items-center justify-between px-5 sm:px-6 py-5 sm:py-6 text-left focus:outline-none" aria-expanded="false">
+          <span class="font-headline font-semibold text-grafite text-base sm:text-lg pr-4 leading-snug">
             "E se eu gastar e não der certo?"
           </span>
           <svg class="acc-icon w-5 h-5 text-verde flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
           </svg>
         </button>
-        <div class="acc-content px-6 pb-5">
-          <p class="text-gray-500 text-sm leading-relaxed">
+        <div class="acc-content px-5 sm:px-6 pb-5 sm:pb-6">
+          <p class="text-gray-500 text-sm sm:text-base leading-relaxed">
             A decisão precisa ser segura, planejada e alinhada ao seu caso. Por isso começamos com uma avaliação individual — para garantir que faz sentido para você antes de qualquer compromisso.
           </p>
         </div>
       </div>
 
       <!-- Objeção 4 -->
-      <div class="card acc-item overflow-hidden">
-        <button class="acc-trigger w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none" aria-expanded="false">
-          <span class="font-headline font-semibold text-grafite text-sm sm:text-base pr-4">
+      <div class="card acc-item overflow-hidden border border-black/5">
+        <button class="acc-trigger w-full flex items-center justify-between px-5 sm:px-6 py-5 sm:py-6 text-left focus:outline-none" aria-expanded="false">
+          <span class="font-headline font-semibold text-grafite text-base sm:text-lg pr-4 leading-snug">
             "Tenho medo de ficar com aparência artificial."
           </span>
           <svg class="acc-icon w-5 h-5 text-verde flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
           </svg>
         </button>
-        <div class="acc-content px-6 pb-5">
-          <p class="text-gray-500 text-sm leading-relaxed">
+        <div class="acc-content px-5 sm:px-6 pb-5 sm:pb-6">
+          <p class="text-gray-500 text-sm sm:text-base leading-relaxed">
             O foco é devolver firmeza, conforto e naturalidade. O resultado é planejado para parecer e funcionar como seus próprios dentes.
           </p>
         </div>
       </div>
 
       <!-- Objeção 5 -->
-      <div class="card acc-item overflow-hidden">
-        <button class="acc-trigger w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none" aria-expanded="false">
-          <span class="font-headline font-semibold text-grafite text-sm sm:text-base pr-4">
+      <div class="card acc-item overflow-hidden border border-black/5">
+        <button class="acc-trigger w-full flex items-center justify-between px-5 sm:px-6 py-5 sm:py-6 text-left focus:outline-none" aria-expanded="false">
+          <span class="font-headline font-semibold text-grafite text-base sm:text-lg pr-4 leading-snug">
             "Não sei se cabe no meu orçamento."
           </span>
           <svg class="acc-icon w-5 h-5 text-verde flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
           </svg>
         </button>
-        <div class="acc-content px-6 pb-5">
-          <p class="text-gray-500 text-sm leading-relaxed">
+        <div class="acc-content px-5 sm:px-6 pb-5 sm:pb-6">
+          <p class="text-gray-500 text-sm sm:text-base leading-relaxed">
             A avaliação também ajuda a entender possibilidades reais de tratamento. Você vai saber os valores e as condições antes de tomar qualquer decisão.
           </p>
         </div>
@@ -535,13 +785,14 @@
     </div>
 
     <!-- Frase final forte -->
-    <div class="text-center mt-10 fade-up">
+    <div class="text-center mt-10 sm:mt-12 fade-up">
       <p class="font-headline font-bold text-grafite text-xl sm:text-2xl">
         "Você não precisa decidir no escuro."
       </p>
-      <p class="text-gray-400 text-sm mt-2">A avaliação existe para que você se sinta segura antes de qualquer passo.</p>
+      <p class="text-gray-400 text-sm sm:text-base mt-2">A avaliação existe para que você se sinta segura antes de qualquer passo.</p>
     </div>
 
+  </div>
   </div>
 </section>
 
@@ -549,8 +800,9 @@
 <!-- ═══════════════════════════════════
      DOBRA 5 — Confiança na clínica
 ═══════════════════════════════════ -->
-<section id="clinica" class="py-14 sm:py-20 bg-offwhite">
-  <div class="max-w-5xl mx-auto px-5 sm:px-8">
+<section id="clinica" class="deferred-section py-16 sm:py-24 bg-offwhite">
+  <div class="max-w-5xl mx-auto px-4 sm:px-8">
+    <div class="section-card tone-soft px-5 py-8 sm:p-10 lg:p-12">
 
     <div class="text-center mb-10 fade-up">
       <div class="sec-line"></div>
@@ -559,73 +811,74 @@
       </h2>
     </div>
 
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 mb-10">
 
-      <div class="card p-6 fade-up fade-up-d1">
+      <div class="card p-6 sm:p-7 fade-up fade-up-d1">
         <div class="w-10 h-10 rounded-xl bg-verde-light flex items-center justify-center mb-3">
           <svg class="w-5 h-5 text-verde" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
           </svg>
         </div>
-        <p class="font-headline font-semibold text-grafite text-sm">Clínica com foco em implante dentário</p>
+        <p class="font-headline font-semibold text-grafite text-base leading-snug">Clínica com foco em implante dentário</p>
       </div>
 
-      <div class="card p-6 fade-up fade-up-d2">
+      <div class="card p-6 sm:p-7 fade-up fade-up-d2">
         <div class="w-10 h-10 rounded-xl bg-verde-light flex items-center justify-center mb-3">
           <svg class="w-5 h-5 text-verde" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
             <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
           </svg>
         </div>
-        <p class="font-headline font-semibold text-grafite text-sm">Equipe experiente em reabilitação oral</p>
+        <p class="font-headline font-semibold text-grafite text-base leading-snug">Equipe experiente em reabilitação oral</p>
       </div>
 
-      <div class="card p-6 fade-up fade-up-d3">
+      <div class="card p-6 sm:p-7 fade-up fade-up-d3">
         <div class="w-10 h-10 rounded-xl bg-verde-light flex items-center justify-center mb-3">
           <svg class="w-5 h-5 text-verde" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
           </svg>
         </div>
-        <p class="font-headline font-semibold text-grafite text-sm">Atendimento consultivo e acolhedor</p>
+        <p class="font-headline font-semibold text-grafite text-base leading-snug">Atendimento consultivo e acolhedor</p>
       </div>
 
-      <div class="card p-6 fade-up fade-up-d2">
+      <div class="card p-6 sm:p-7 fade-up fade-up-d2">
         <div class="w-10 h-10 rounded-xl bg-verde-light flex items-center justify-center mb-3">
           <svg class="w-5 h-5 text-verde" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
           </svg>
         </div>
-        <p class="font-headline font-semibold text-grafite text-sm">Explicação simples e direta</p>
+        <p class="font-headline font-semibold text-grafite text-base leading-snug">Explicação simples e direta</p>
       </div>
 
-      <div class="card p-6 fade-up fade-up-d3">
+      <div class="card p-6 sm:p-7 fade-up fade-up-d3">
         <div class="w-10 h-10 rounded-xl bg-verde-light flex items-center justify-center mb-3">
           <svg class="w-5 h-5 text-verde" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
           </svg>
         </div>
-        <p class="font-headline font-semibold text-grafite text-sm">Tratamento com planejamento</p>
+        <p class="font-headline font-semibold text-grafite text-base leading-snug">Tratamento com planejamento</p>
       </div>
 
-      <div class="card p-6 fade-up fade-up-d4">
+      <div class="card p-6 sm:p-7 fade-up fade-up-d4">
         <div class="w-10 h-10 rounded-xl bg-verde-light flex items-center justify-center mb-3">
           <svg class="w-5 h-5 text-verde" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
           </svg>
         </div>
-        <p class="font-headline font-semibold text-grafite text-sm">Mais segurança do começo ao fim</p>
+        <p class="font-headline font-semibold text-grafite text-base leading-snug">Mais segurança do começo ao fim</p>
       </div>
 
     </div>
 
     <div class="text-center fade-up">
-      <p class="text-gray-500 text-sm italic mb-7">
+      <p class="text-gray-500 text-base sm:text-lg italic mb-7">
         Aqui, você entende seu caso antes de tomar qualquer decisão.
       </p>
-      <a href="#formulario" class="btn-primary btn-primary-lg">
+      <a href="#formulario" class="btn-primary btn-primary-lg btn-block-mobile inline-flex">
         Agendar avaliação
       </a>
     </div>
 
+  </div>
   </div>
 </section>
 
@@ -633,56 +886,58 @@
 <!-- ═══════════════════════════════════
      DOBRA 6 — Fechamento + CTA + Formulário
 ═══════════════════════════════════ -->
-<section id="formulario" class="py-14 sm:py-20" style="background-color: #0F6934;">
-  <div class="max-w-5xl mx-auto px-5 sm:px-8">
+<section id="formulario" class="deferred-section py-16 sm:py-24" style="background: linear-gradient(180deg, #0F6934 0%, #0b5328 100%);">
+  <div class="max-w-5xl mx-auto px-4 sm:px-8">
 
-    <div class="grid lg:grid-cols-2 gap-12 items-start">
+    <div class="grid lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] gap-8 sm:gap-12 items-start">
 
       <!-- Esquerda: copy de fechamento -->
       <div class="fade-up">
+        <div class="rounded-[1.75rem] border border-white/10 bg-white/5 backdrop-blur-sm p-6 sm:p-8 lg:p-9">
         <img src="logo_oral_sin.webp" alt="Oral Sin Implantes"
-             class="h-8 sm:h-10 w-auto mb-8 brightness-0 invert" />
+             class="h-8 sm:h-10 w-auto mb-8" width="160" height="40" loading="lazy" decoding="async" />
 
         <h2 class="font-headline font-bold text-white text-2xl sm:text-3xl leading-tight mb-5">
           Está em tempo de resolver isso com segurança.
         </h2>
 
-        <p class="text-green-100 text-base leading-relaxed mb-7">
+        <p class="text-green-100 text-base sm:text-lg leading-relaxed mb-7">
           Se você perdeu dentes, usa dentadura ou já adiou esse tratamento por medo, insegurança ou receio de gastar sem resultado, o primeiro passo é uma avaliação cuidadosa.
         </p>
 
         <ul class="space-y-3">
-          <li class="flex items-start gap-3 text-green-100 text-sm">
+          <li class="flex items-start gap-3 text-green-100 text-sm sm:text-base rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
             <svg class="w-5 h-5 text-green-300 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
             Descubra se o implante faz sentido para o seu caso
           </li>
-          <li class="flex items-start gap-3 text-green-100 text-sm">
+          <li class="flex items-start gap-3 text-green-100 text-sm sm:text-base rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
             <svg class="w-5 h-5 text-green-300 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
             Entenda sua situação atual
           </li>
-          <li class="flex items-start gap-3 text-green-100 text-sm">
+          <li class="flex items-start gap-3 text-green-100 text-sm sm:text-base rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
             <svg class="w-5 h-5 text-green-300 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
             Tire dúvidas sobre o tratamento
           </li>
-          <li class="flex items-start gap-3 text-green-100 text-sm">
+          <li class="flex items-start gap-3 text-green-100 text-sm sm:text-base rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
             <svg class="w-5 h-5 text-green-300 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
             Saiba quais são as possibilidades
           </li>
-          <li class="flex items-start gap-3 text-green-100 text-sm">
+          <li class="flex items-start gap-3 text-green-100 text-sm sm:text-base rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
             <svg class="w-5 h-5 text-green-300 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
             Receba uma orientação clara
           </li>
         </ul>
+        </div>
       </div>
 
       <!-- Direita: formulário -->
       <div class="fade-up fade-up-d2">
-        <div class="bg-white rounded-2xl p-8 sm:p-10 shadow-2xl">
+        <div class="bg-white rounded-[1.75rem] p-6 sm:p-8 lg:p-10 shadow-[0_24px_70px_rgba(0,0,0,0.2)]">
 
-          <h3 class="font-headline font-bold text-grafite text-xl mb-1">
+          <h3 class="font-headline font-bold text-grafite text-xl sm:text-2xl mb-1">
             Agende sua avaliação
           </h3>
-          <p class="text-gray-400 text-sm mb-6">
+          <p class="text-gray-400 text-sm sm:text-base mb-6">
             Preencha seus dados para falar com a clínica.
           </p>
 
@@ -690,7 +945,7 @@
             <div class="space-y-4">
 
               <div>
-                <label class="block text-sm font-medium text-grafite mb-1.5 font-headline" for="nome">
+                <label class="block text-sm font-medium text-grafite mb-2 font-headline" for="nome">
                   Nome <span class="text-verde">*</span>
                 </label>
                 <input type="text" id="nome" name="nome"
@@ -700,7 +955,7 @@
               </div>
 
               <div>
-                <label class="block text-sm font-medium text-grafite mb-1.5 font-headline" for="telefone">
+                <label class="block text-sm font-medium text-grafite mb-2 font-headline" for="telefone">
                   Telefone / WhatsApp <span class="text-verde">*</span>
                 </label>
                 <input type="tel" id="telefone" name="telefone"
@@ -725,7 +980,7 @@
             <p class="text-gray-500 text-sm">Nossa equipe vai entrar em contato em breve pelo WhatsApp.</p>
           </div>
 
-          <p class="text-center text-xs text-gray-400 mt-5 flex items-center justify-center gap-1.5">
+          <p class="text-center text-xs sm:text-sm text-gray-400 mt-5 flex items-center justify-center gap-1.5 rounded-2xl bg-gray-50 px-4 py-3">
             <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
             </svg>
@@ -744,20 +999,20 @@
      RODAPÉ (não conta como dobra)
 ═══════════════════════════════════ -->
 <footer class="py-10 sm:py-12" style="background-color: #1f2937;">
-  <div class="max-w-6xl mx-auto px-5 sm:px-8">
+  <div class="max-w-6xl mx-auto px-4 sm:px-8">
 
     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8 mb-8">
 
       <!-- Logo -->
       <img src="logo_oral_sin.webp" alt="Oral Sin Implantes"
-           class="h-8 w-auto brightness-0 invert" />
+           class="h-8 w-auto" width="160" height="40" loading="lazy" decoding="async" />
 
       <!-- Links -->
-      <nav class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-400" aria-label="Links do rodapé">
-        <a href="#hero"      class="hover:text-verde transition-colors">Início</a>
-        <a href="#beneficios" class="hover:text-verde transition-colors">Benefícios</a>
-        <a href="#objecoes"  class="hover:text-verde transition-colors">Dúvidas</a>
-        <a href="#formulario" class="hover:text-verde transition-colors">Agendar</a>
+      <nav class="flex flex-wrap gap-2 text-sm text-gray-300" aria-label="Links do rodapé">
+        <a href="#hero"      class="footer-nav-link hover:text-white transition-colors">Início</a>
+        <a href="#beneficios" class="footer-nav-link hover:text-white transition-colors">Benefícios</a>
+        <a href="#objecoes"  class="footer-nav-link hover:text-white transition-colors">Dúvidas</a>
+        <a href="#formulario" class="footer-nav-link footer-nav-link-cta hover:text-white transition-colors">Agendar</a>
       </nav>
 
     </div>
@@ -791,12 +1046,20 @@
   }, { passive: true });
 
   /* ── Fade-in ── */
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  const animatedSections = document.querySelectorAll('.fade-up:not(.above-fold)');
+  if ('IntersectionObserver' in window && animatedSections.length) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.08, rootMargin: '120px 0px -40px 0px' });
+
+    animatedSections.forEach(el => observer.observe(el));
+  } else {
+    animatedSections.forEach(el => el.classList.add('visible'));
+  }
 
   /* ── Accordion ── */
   document.getElementById('accordion').querySelectorAll('.acc-trigger').forEach(trigger => {
@@ -822,8 +1085,58 @@
   /* ── Formulário ── */
   const form    = document.getElementById('contato-form');
   const success = document.getElementById('form-success');
+  const ctaLinks = document.querySelectorAll('a[href="#formulario"]');
 
-  form.addEventListener('submit', e => {
+  const WEBHOOK_URL  = 'https://nnwb.voictech.com.br/webhook/oralsin';
+  let metaFormStarted = false;
+
+  function readCookie(name) {
+    const cookie = document.cookie
+      .split('; ')
+      .find(row => row.startsWith(`${name}=`));
+    return cookie ? decodeURIComponent(cookie.split('=').slice(1).join('=')) : null;
+  }
+
+  function buildMetaEventId() {
+    const now = Date.now().toString(36);
+    const random = Math.random().toString(36).slice(2, 10);
+    return `lead_${now}_${random}`;
+  }
+
+  function buildMetaFbc() {
+    const existingFbc = readCookie('_fbc');
+    if (existingFbc) return existingFbc;
+
+    const fbclid = new URLSearchParams(window.location.search).get('fbclid');
+    if (!fbclid) return null;
+
+    const synthesizedFbc = `fb.1.${Date.now()}.${fbclid}`;
+    document.cookie = `_fbc=${encodeURIComponent(synthesizedFbc)}; path=/; max-age=7776000; SameSite=Lax`;
+    return synthesizedFbc;
+  }
+
+  ctaLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (typeof fbq === 'function') {
+        fbq('track', 'Contact', {
+          content_name: 'Agendar avaliação',
+          content_category: 'CTA'
+        });
+      }
+    });
+  });
+
+  form.querySelectorAll('.form-input').forEach(input => {
+    input.addEventListener('focus', () => {
+      if (metaFormStarted || typeof fbq !== 'function') return;
+      metaFormStarted = true;
+      fbq('trackCustom', 'FormStart', {
+        form_name: 'Agende sua avaliação'
+      });
+    }, { once: true });
+  });
+
+  form.addEventListener('submit', async e => {
     e.preventDefault();
     let valid = true;
 
@@ -836,6 +1149,57 @@
     });
 
     if (!valid) return;
+
+    const params = new URLSearchParams(window.location.search);
+    const eventId = buildMetaEventId();
+    const eventTime = Math.floor(Date.now() / 1000);
+    const fbp = readCookie('_fbp');
+    const fbc = buildMetaFbc();
+    const payload = {
+      event_name:   'Lead',
+      event_id:     eventId,
+      event_time:   eventTime,
+      action_source:'website',
+      event_source_url: window.location.href,
+      client_user_agent: navigator.userAgent,
+      fbp:          fbp || null,
+      fbc:          fbc || null,
+      nome:         form.querySelector('[name="nome"]').value.trim(),
+      telefone:     form.querySelector('[name="telefone"]').value.trim(),
+      pagina:       'index',
+      utm_source:   params.get('utm_source')   || null,
+      utm_medium:   params.get('utm_medium')   || null,
+      utm_campaign: params.get('utm_campaign') || null,
+      utm_content:  params.get('utm_content')  || null,
+    };
+
+    /* Webhook — fire and forget */
+    fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    }).catch(err => console.error('Webhook error:', err));
+
+    /* GTM dataLayer event */
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'lead_submitted', ...payload });
+
+    /* Google Ads conversion */
+    if (typeof gtag_report_conversion === 'function') {
+      gtag_report_conversion();
+    }
+
+    /* Meta Pixel lead */
+    if (typeof fbq === 'function') {
+      fbq('track', 'Lead', {
+        content_name: 'Agende sua avaliação',
+        content_category: 'Formulário',
+        status: 'submitted'
+      }, {
+        eventID: eventId
+      });
+    }
+
     form.style.display = 'none';
     success.style.display = 'block';
     success.scrollIntoView({ behavior: 'smooth', block: 'center' });

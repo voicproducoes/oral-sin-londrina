@@ -35,3 +35,6 @@ build/
 .cache/
 .parcel-cache/
 .vite/
+
+# Automação e memória local do projeto
+agente/
