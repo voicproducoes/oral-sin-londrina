@@ -42,12 +42,26 @@
     })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
 
     function scheduleThirdPartyTrackers() {
-      const run = () => window.__loadThirdPartyTrackers();
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(run, { timeout: 1800 });
-      } else {
-        window.addEventListener('load', run, { once: true });
-      }
+      let scheduled = false;
+
+      const run = () => {
+        if (scheduled) return;
+        scheduled = true;
+        window.__loadThirdPartyTrackers();
+      };
+
+      const onFirstInteraction = () => {
+        run();
+        window.removeEventListener('pointerdown', onFirstInteraction, { capture: true });
+        window.removeEventListener('keydown', onFirstInteraction, { capture: true });
+        window.removeEventListener('touchstart', onFirstInteraction, { capture: true });
+      };
+
+      window.addEventListener('load', run, { once: true });
+      window.addEventListener('pointerdown', onFirstInteraction, { once: true, passive: true, capture: true });
+      window.addEventListener('keydown', onFirstInteraction, { once: true, capture: true });
+      window.addEventListener('touchstart', onFirstInteraction, { once: true, passive: true, capture: true });
+      window.setTimeout(run, 4000);
     }
 
     document.addEventListener('DOMContentLoaded', scheduleThirdPartyTrackers, { once: true });
@@ -86,13 +100,9 @@
   <link rel="dns-prefetch" href="https://nnwb.voictech.com.br" />
 
   <!-- Preload LCP -->
-  <link rel="preload" as="font" href="fonts/inter-latin.woff2" type="font/woff2" crossorigin />
   <link rel="preload" as="font" href="fonts/montserrat-latin.woff2" type="font/woff2" crossorigin />
-  <link rel="preload" as="image"
-        href="hero-mobile.webp"
-        imagesrcset="hero-mobile.webp 640w, hero-institucional.webp 1024w"
-        imagesizes="100vw"
-        fetchpriority="high" />
+  <link rel="preload" as="image" href="hero-mobile.webp" type="image/webp" media="(max-width: 639px)" fetchpriority="high" />
+  <link rel="preload" as="image" href="hero-institucional.webp" type="image/webp" media="(min-width: 640px)" fetchpriority="high" />
 
   <style>
     /* ── Fontes auto-hospedadas ── */
@@ -998,7 +1008,7 @@ src="https://www.facebook.com/tr?id=352020864036621&ev=PageView&noscript=1"
 <!-- ═══════════════════════════════════
      RODAPÉ (não conta como dobra)
 ═══════════════════════════════════ -->
-<footer class="py-10 sm:py-12" style="background-color: #1f2937;">
+<footer class="deferred-section py-10 sm:py-12" style="background-color: #1f2937;">
   <div class="max-w-6xl mx-auto px-4 sm:px-8">
 
     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8 mb-8">
@@ -1041,8 +1051,22 @@ src="https://www.facebook.com/tr?id=352020864036621&ev=PageView&noscript=1"
 <script>
   /* ── Header shadow ── */
   const header = document.getElementById('site-header');
+  let headerScrollTicking = false;
+  let headerScrolled = false;
+
+  function syncHeaderShadow() {
+    headerScrollTicking = false;
+    const shouldBeScrolled = window.scrollY > 20;
+    if (shouldBeScrolled === headerScrolled) return;
+    headerScrolled = shouldBeScrolled;
+    header.classList.toggle('scrolled', shouldBeScrolled);
+  }
+
+  syncHeaderShadow();
   window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 20);
+    if (headerScrollTicking) return;
+    headerScrollTicking = true;
+    window.requestAnimationFrame(syncHeaderShadow);
   }, { passive: true });
 
   /* ── Fade-in ── */
@@ -1062,23 +1086,37 @@ src="https://www.facebook.com/tr?id=352020864036621&ev=PageView&noscript=1"
   }
 
   /* ── Accordion ── */
-  document.getElementById('accordion').querySelectorAll('.acc-trigger').forEach(trigger => {
+  const accordion = document.getElementById('accordion');
+  const accordionItems = Array.from(accordion.querySelectorAll('.acc-item'));
+  let openAccordionItem = accordionItems.find(item => item.classList.contains('active')) || null;
+  let openAccordionTrigger = openAccordionItem ? openAccordionItem.querySelector('.acc-trigger') : null;
+  let openAccordionContent = openAccordionItem ? openAccordionItem.querySelector('.acc-content') : null;
+
+  accordion.querySelectorAll('.acc-trigger').forEach(trigger => {
     trigger.addEventListener('click', () => {
-      const item    = trigger.closest('.acc-item');
+      const item = trigger.closest('.acc-item');
       const content = item.querySelector('.acc-content');
-      const isOpen  = item.classList.contains('active');
+      const isOpen = item === openAccordionItem;
 
-      document.querySelectorAll('.acc-item').forEach(i => {
-        i.classList.remove('active');
-        i.querySelector('.acc-content').classList.remove('open');
-        i.querySelector('.acc-trigger').setAttribute('aria-expanded', 'false');
-      });
-
-      if (!isOpen) {
-        item.classList.add('active');
-        content.classList.add('open');
-        trigger.setAttribute('aria-expanded', 'true');
+      if (openAccordionItem) {
+        openAccordionItem.classList.remove('active');
+        openAccordionContent.classList.remove('open');
+        openAccordionTrigger.setAttribute('aria-expanded', 'false');
       }
+
+      if (isOpen) {
+        openAccordionItem = null;
+        openAccordionTrigger = null;
+        openAccordionContent = null;
+        return;
+      }
+
+      item.classList.add('active');
+      content.classList.add('open');
+      trigger.setAttribute('aria-expanded', 'true');
+      openAccordionItem = item;
+      openAccordionTrigger = trigger;
+      openAccordionContent = content;
     });
   });
 
@@ -1086,6 +1124,15 @@ src="https://www.facebook.com/tr?id=352020864036621&ev=PageView&noscript=1"
   const form    = document.getElementById('contato-form');
   const success = document.getElementById('form-success');
   const ctaLinks = document.querySelectorAll('a[href="#formulario"]');
+  const formInputs = Array.from(form.querySelectorAll('.form-input'));
+  const formFields = {
+    nome: form.elements.namedItem('nome'),
+    telefone: form.elements.namedItem('telefone')
+  };
+  const formErrors = {
+    nome: form.querySelector('[data-error="nome"]'),
+    telefone: form.querySelector('[data-error="telefone"]')
+  };
 
   const WEBHOOK_URL  = 'https://nnwb.voictech.com.br/webhook/oralsin';
   let metaFormStarted = false;
@@ -1126,7 +1173,7 @@ src="https://www.facebook.com/tr?id=352020864036621&ev=PageView&noscript=1"
     });
   });
 
-  form.querySelectorAll('.form-input').forEach(input => {
+  formInputs.forEach(input => {
     input.addEventListener('focus', () => {
       if (metaFormStarted || typeof fbq !== 'function') return;
       metaFormStarted = true;
@@ -1141,8 +1188,8 @@ src="https://www.facebook.com/tr?id=352020864036621&ev=PageView&noscript=1"
     let valid = true;
 
     ['nome', 'telefone'].forEach(name => {
-      const el  = form.querySelector(`[name="${name}"]`);
-      const err = form.querySelector(`[data-error="${name}"]`);
+      const el  = formFields[name];
+      const err = formErrors[name];
       const ok  = el.value.trim().length >= 2 && (name !== 'telefone' || el.value.replace(/\D/g,'').length >= 10);
       err.classList.toggle('hidden', ok);
       if (!ok && valid) { el.focus(); valid = false; }
@@ -1164,8 +1211,8 @@ src="https://www.facebook.com/tr?id=352020864036621&ev=PageView&noscript=1"
       client_user_agent: navigator.userAgent,
       fbp:          fbp || null,
       fbc:          fbc || null,
-      nome:         form.querySelector('[name="nome"]').value.trim(),
-      telefone:     form.querySelector('[name="telefone"]').value.trim(),
+      nome:         formFields.nome.value.trim(),
+      telefone:     formFields.telefone.value.trim(),
       pagina:       'index',
       utm_source:   params.get('utm_source')   || null,
       utm_medium:   params.get('utm_medium')   || null,
@@ -1205,9 +1252,9 @@ src="https://www.facebook.com/tr?id=352020864036621&ev=PageView&noscript=1"
     success.scrollIntoView({ behavior: 'smooth', block: 'center' });
   });
 
-  form.querySelectorAll('.form-input').forEach(input => {
+  formInputs.forEach(input => {
     input.addEventListener('input', () => {
-      const err = form.querySelector(`[data-error="${input.name}"]`);
+      const err = formErrors[input.name];
       if (err) err.classList.add('hidden');
     });
   });
