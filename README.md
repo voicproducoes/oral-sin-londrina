@@ -5,7 +5,7 @@ Landing page de conversão da Oral Sin Londrina, otimizada para mobile, captura 
 ## Escopo
 
 - Landing page principal em [index.html](/Users/giovanelazari/oral-sin/index.html)
-- Variante A/B histórica em `index-ab.html` quando aplicável
+- Variante B para teste A/B em [index-b.html](/Users/giovanelazari/oral-sin/index-b.html) (formulário na primeira dobra)
 - Assets locais otimizados em `.webp`
 - Fontes locais em `fonts/`
 - Regras de cache e compressão em [.htaccess](/Users/giovanelazari/oral-sin/.htaccess)
@@ -41,12 +41,25 @@ Landing page de conversão da Oral Sin Londrina, otimizada para mobile, captura 
 Arquivos críticos para subir:
 
 - [index.html](/Users/giovanelazari/oral-sin/index.html)
+- [index-b.html](/Users/giovanelazari/oral-sin/index-b.html)
 - [.htaccess](/Users/giovanelazari/oral-sin/.htaccess)
 - `fonts/`
 - `*.webp`
 - `favicon.svg`
 - `robots.txt`
 - `sitemap.xml`
+
+## Teste A/B
+
+- URL da variante A (controle): `/` (index.html) — formulário no final da página.
+- URL da variante B: `/index-b.html` — formulário na primeira dobra, ao lado da copy.
+- As duas páginas ficam no ar simultaneamente; `index-b.html` tem `noindex` + `canonical` apontando para `/` para não dividir SEO.
+- Diferenciação nos dados:
+  - dataLayer: `{ variant: 'B' }` em todos os eventos da variante B.
+  - Meta Pixel: parâmetro `variant: 'B'` nos eventos `PageView`, `ViewContent`, `Contact`, `FormStart`, `Lead`.
+  - Webhook n8n: payload inclui `variant: 'B'` e `pagina: 'index-b'`.
+- UTM sugerido para campanhas que mandam tráfego para a variante B: `?utm_content=var_b`.
+- No GA4, criar segmento/dimensão custom `variant` para separar as conversões.
 
 ## Observações
 
