@@ -22,6 +22,8 @@ npm-debug.log*
 .env
 .env.local
 .env.*.local
+backend/.env
+backend/clients.json
 
 # Dependencies (caso venha a usar npm)
 node_modules/

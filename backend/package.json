@@ -1,0 +1,19 @@
+{
+  "name": "oral-sin-capi",
+  "version": "1.0.0",
+  "description": "Proxy server-side para Meta Conversions API — Oral Sin",
+  "type": "module",
+  "main": "server.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.4.1"
+  }
+}

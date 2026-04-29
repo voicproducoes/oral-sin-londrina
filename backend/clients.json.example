@@ -1,0 +1,16 @@
+[
+  {
+    "slug": "oral-sin",
+    "pixel_id": "352020864036621",
+    "token": "EAAxxxxxxxxxxxxxxxxxx",
+    "origins": "https://londrina.oralsin.com.br",
+    "test_event_code": ""
+  },
+  {
+    "slug": "outro-cliente",
+    "pixel_id": "999888777666555",
+    "token": "EAAxxxxxxxxxxxxxxxxxx",
+    "origins": "https://www.outrocliente.com.br,https://outrocliente.com.br",
+    "test_event_code": ""
+  }
+]

@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <script>
     document.documentElement.classList.add('js');
+    window.__LP_PAGINA      = 'index';
+    window.__CAPI_ENDPOINT  = 'https://capi.voictech.com.br/api/oral-sin/event';
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
     window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
@@ -389,22 +391,8 @@
     gtag('js', new Date());
     gtag('config', 'G-P2CW6RSZVG');
     gtag('config', 'AW-10975665738');
-
-    function gtag_report_conversion(url) {
-      var callback = function () {
-        if (typeof(url) != 'undefined') {
-          window.location = url;
-        }
-      };
-
-      gtag('event', 'conversion', {
-        'send_to': 'AW-10975665738/WYCZCJafzuAYEMq8zfEo',
-        'event_callback': callback
-      });
-
-      return false;
-    }
   </script>
+  <script src="js/app.js?v=2" defer></script>
 </head>
 
 <body class="bg-offwhite">
@@ -446,7 +434,7 @@ src="https://www.facebook.com/tr?id=352020864036621&ev=PageView&noscript=1"
     <div class="grid lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] gap-6 sm:gap-10 lg:gap-14 items-center">
 
       <!-- Esquerda: copy -->
-      <div class="fade-up above-fold order-1">
+      <div class="fade-up above-fold order-2 lg:order-1">
         <div class="hero-panel p-6 sm:p-8 lg:p-10">
           <span class="inline-flex text-[0.7rem] sm:text-xs font-semibold tracking-[0.24em] uppercase text-verde/80 bg-verde-light px-3 py-1.5 rounded-full mb-4 sm:mb-5 font-headline">
             Londrina / PR
@@ -469,12 +457,8 @@ src="https://www.facebook.com/tr?id=352020864036621&ev=PageView&noscript=1"
             </p>
           </div>
 
-          <a href="#formulario" class="btn-primary btn-primary-lg btn-block-mobile mb-7 sm:mb-8 inline-flex">
-            Quero agendar minha avaliação
-          </a>
-
           <!-- Apoios -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 mt-7 sm:mt-8">
             <span class="chip-card text-xs sm:text-sm font-medium text-grafite">
             <svg class="w-3 h-3 text-verde flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
             Especialistas em implante
@@ -495,26 +479,63 @@ src="https://www.facebook.com/tr?id=352020864036621&ev=PageView&noscript=1"
         </div>
       </div>
 
-      <!-- Direita: imagem + brasão integrado -->
-      <div class="fade-up above-fold flex flex-col items-center gap-4 order-2">
-        <div class="relative w-full max-w-xl">
-          <img
-            src="hero-institucional.webp"
-            srcset="hero-mobile.webp 640w, hero-institucional.webp 1024w"
-            sizes="(max-width: 640px) 100vw, 1024px"
-            alt="Paciente sorrindo com dentista especialista em implantes na Oral Sin Londrina"
-            class="w-full rounded-[1.5rem] shadow-[0_24px_60px_rgba(17,24,39,0.14)] object-cover"
-            style="max-height: 460px; object-position: center top;"
-            width="1024" height="571"
-            fetchpriority="high" loading="eager" decoding="async"
-          />
-          <!-- Brasão integrado no canto da imagem -->
-          <div class="absolute -bottom-4 right-4 sm:-bottom-5 sm:-right-5">
-            <img src="Brasao-OS-1-1.webp"
-                 alt="Oral Sin — Rede de Implantes Nº 1 do Brasil"
-                 class="w-20 sm:w-24 lg:w-28 drop-shadow-[0_14px_30px_rgba(17,24,39,0.25)]"
-                 width="112" height="112" loading="lazy" decoding="async" />
+      <!-- Direita: formulário -->
+      <div id="formulario" class="fade-up above-fold order-1 lg:order-2" style="scroll-margin-top: 6rem;">
+        <div class="bg-white rounded-[1.75rem] p-6 sm:p-8 lg:p-10 shadow-[0_24px_70px_rgba(17,24,39,0.15)]">
+
+          <h3 class="font-headline font-bold text-grafite text-xl sm:text-2xl mb-1">
+            Agende sua avaliação
+          </h3>
+          <p class="text-gray-400 text-sm sm:text-base mb-6">
+            Preencha seus dados para falar com a clínica.
+          </p>
+
+          <form id="contato-form" novalidate>
+            <div class="space-y-4">
+
+              <div>
+                <label class="block text-sm font-medium text-grafite mb-2 font-headline" for="nome">
+                  Nome <span class="text-verde">*</span>
+                </label>
+                <input type="text" id="nome" name="nome"
+                  class="form-input" placeholder="Seu nome completo"
+                  autocomplete="name" required />
+                <p class="hidden text-red-500 text-xs mt-1" data-error="nome">Informe seu nome.</p>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-grafite mb-2 font-headline" for="telefone">
+                  Telefone / WhatsApp <span class="text-verde">*</span>
+                </label>
+                <input type="tel" id="telefone" name="telefone"
+                  class="form-input" placeholder="(43) 9 0000-0000"
+                  autocomplete="tel" required />
+                <p class="hidden text-red-500 text-xs mt-1" data-error="telefone">Informe seu telefone.</p>
+              </div>
+
+              <button type="submit" class="btn-primary w-full text-base py-4 mt-2">
+                Quero agendar minha avaliação
+              </button>
+
+            </div>
+          </form>
+
+          <!-- Sucesso -->
+          <div id="form-success" role="alert" class="text-center py-4">
+            <svg class="w-12 h-12 text-verde mx-auto mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <h3 class="font-headline font-bold text-grafite text-lg mb-2">Recebemos seu contato!</h3>
+            <p class="text-gray-500 text-sm">Nossa equipe vai entrar em contato em breve pelo WhatsApp.</p>
           </div>
+
+          <p class="text-center text-xs sm:text-sm text-gray-400 mt-5 flex items-center justify-center gap-1.5 rounded-2xl bg-gray-50 px-4 py-3">
+            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+            </svg>
+            Atendimento sem pressão. Seus dados são seguros.
+          </p>
+
         </div>
       </div>
 
@@ -896,10 +917,10 @@ src="https://www.facebook.com/tr?id=352020864036621&ev=PageView&noscript=1"
 <!-- ═══════════════════════════════════
      DOBRA 6 — Fechamento + CTA + Formulário
 ═══════════════════════════════════ -->
-<section id="formulario" class="deferred-section py-16 sm:py-24" style="background: linear-gradient(180deg, #0F6934 0%, #0b5328 100%);">
+<section class="deferred-section py-16 sm:py-24" style="background: linear-gradient(180deg, #0F6934 0%, #0b5328 100%);">
   <div class="max-w-5xl mx-auto px-4 sm:px-8">
 
-    <div class="grid lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] gap-8 sm:gap-12 items-start">
+    <div class="grid lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] gap-8 sm:gap-12 items-center">
 
       <!-- Esquerda: copy de fechamento -->
       <div class="fade-up">
@@ -940,64 +961,23 @@ src="https://www.facebook.com/tr?id=352020864036621&ev=PageView&noscript=1"
         </div>
       </div>
 
-      <!-- Direita: formulário -->
-      <div class="fade-up fade-up-d2">
-        <div class="bg-white rounded-[1.75rem] p-6 sm:p-8 lg:p-10 shadow-[0_24px_70px_rgba(0,0,0,0.2)]">
-
-          <h3 class="font-headline font-bold text-grafite text-xl sm:text-2xl mb-1">
-            Agende sua avaliação
-          </h3>
-          <p class="text-gray-400 text-sm sm:text-base mb-6">
-            Preencha seus dados para falar com a clínica.
-          </p>
-
-          <form id="contato-form" novalidate>
-            <div class="space-y-4">
-
-              <div>
-                <label class="block text-sm font-medium text-grafite mb-2 font-headline" for="nome">
-                  Nome <span class="text-verde">*</span>
-                </label>
-                <input type="text" id="nome" name="nome"
-                  class="form-input" placeholder="Seu nome completo"
-                  autocomplete="name" required />
-                <p class="hidden text-red-500 text-xs mt-1" data-error="nome">Informe seu nome.</p>
-              </div>
-
-              <div>
-                <label class="block text-sm font-medium text-grafite mb-2 font-headline" for="telefone">
-                  Telefone / WhatsApp <span class="text-verde">*</span>
-                </label>
-                <input type="tel" id="telefone" name="telefone"
-                  class="form-input" placeholder="(43) 9 0000-0000"
-                  autocomplete="tel" required />
-                <p class="hidden text-red-500 text-xs mt-1" data-error="telefone">Informe seu telefone.</p>
-              </div>
-
-              <button type="submit" class="btn-primary w-full text-base py-4 mt-2">
-                Quero agendar minha avaliação
-              </button>
-
-            </div>
-          </form>
-
-          <!-- Sucesso -->
-          <div id="form-success" role="alert" class="text-center py-4">
-            <svg class="w-12 h-12 text-verde mx-auto mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-            <h3 class="font-headline font-bold text-grafite text-lg mb-2">Recebemos seu contato!</h3>
-            <p class="text-gray-500 text-sm">Nossa equipe vai entrar em contato em breve pelo WhatsApp.</p>
-          </div>
-
-          <p class="text-center text-xs sm:text-sm text-gray-400 mt-5 flex items-center justify-center gap-1.5 rounded-2xl bg-gray-50 px-4 py-3">
-            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
-            </svg>
-            Atendimento sem pressão. Seus dados são seguros.
-          </p>
-
-        </div>
+      <!-- Direita: CTA para o formulário no hero -->
+      <div class="fade-up fade-up-d2 flex flex-col items-center justify-center text-center gap-6">
+        <p class="font-headline font-semibold text-white text-xl sm:text-2xl leading-snug">
+          O primeiro passo é<br/>a avaliação gratuita.
+        </p>
+        <p class="text-green-100 text-base leading-relaxed max-w-sm">
+          Sem compromisso, sem pressão.<br/>Preencha o formulário no topo da página.
+        </p>
+        <a href="#formulario" class="btn-primary btn-primary-lg">
+          Agendar agora — é gratuito
+        </a>
+        <p class="text-green-200/60 text-xs flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+          </svg>
+          Seus dados são seguros
+        </p>
       </div>
 
     </div>
@@ -1045,230 +1025,6 @@ src="https://www.facebook.com/tr?id=352020864036621&ev=PageView&noscript=1"
 </footer>
 
 
-<!-- ═══════════════════════════════════
-     JAVASCRIPT
-═══════════════════════════════════ -->
-<script>
-  /* ── Header shadow ── */
-  const header = document.getElementById('site-header');
-  let headerScrollTicking = false;
-  let headerScrolled = false;
-
-  function syncHeaderShadow() {
-    headerScrollTicking = false;
-    const shouldBeScrolled = window.scrollY > 20;
-    if (shouldBeScrolled === headerScrolled) return;
-    headerScrolled = shouldBeScrolled;
-    header.classList.toggle('scrolled', shouldBeScrolled);
-  }
-
-  syncHeaderShadow();
-  window.addEventListener('scroll', () => {
-    if (headerScrollTicking) return;
-    headerScrollTicking = true;
-    window.requestAnimationFrame(syncHeaderShadow);
-  }, { passive: true });
-
-  /* ── Fade-in ── */
-  const animatedSections = document.querySelectorAll('.fade-up:not(.above-fold)');
-  if ('IntersectionObserver' in window && animatedSections.length) {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      });
-    }, { threshold: 0.08, rootMargin: '120px 0px -40px 0px' });
-
-    animatedSections.forEach(el => observer.observe(el));
-  } else {
-    animatedSections.forEach(el => el.classList.add('visible'));
-  }
-
-  /* ── Accordion ── */
-  const accordion = document.getElementById('accordion');
-  const accordionItems = Array.from(accordion.querySelectorAll('.acc-item'));
-  let openAccordionItem = accordionItems.find(item => item.classList.contains('active')) || null;
-  let openAccordionTrigger = openAccordionItem ? openAccordionItem.querySelector('.acc-trigger') : null;
-  let openAccordionContent = openAccordionItem ? openAccordionItem.querySelector('.acc-content') : null;
-
-  accordion.querySelectorAll('.acc-trigger').forEach(trigger => {
-    trigger.addEventListener('click', () => {
-      const item = trigger.closest('.acc-item');
-      const content = item.querySelector('.acc-content');
-      const isOpen = item === openAccordionItem;
-
-      if (openAccordionItem) {
-        openAccordionItem.classList.remove('active');
-        openAccordionContent.classList.remove('open');
-        openAccordionTrigger.setAttribute('aria-expanded', 'false');
-      }
-
-      if (isOpen) {
-        openAccordionItem = null;
-        openAccordionTrigger = null;
-        openAccordionContent = null;
-        return;
-      }
-
-      item.classList.add('active');
-      content.classList.add('open');
-      trigger.setAttribute('aria-expanded', 'true');
-      openAccordionItem = item;
-      openAccordionTrigger = trigger;
-      openAccordionContent = content;
-    });
-  });
-
-  /* ── Formulário ── */
-  const form    = document.getElementById('contato-form');
-  const success = document.getElementById('form-success');
-  const ctaLinks = document.querySelectorAll('a[href="#formulario"]');
-  const formInputs = Array.from(form.querySelectorAll('.form-input'));
-  const formFields = {
-    nome: form.elements.namedItem('nome'),
-    telefone: form.elements.namedItem('telefone')
-  };
-  const formErrors = {
-    nome: form.querySelector('[data-error="nome"]'),
-    telefone: form.querySelector('[data-error="telefone"]')
-  };
-
-  const WEBHOOK_URL  = 'https://nnwb.voictech.com.br/webhook/oralsin';
-  let metaFormStarted = false;
-
-  function readCookie(name) {
-    const cookie = document.cookie
-      .split('; ')
-      .find(row => row.startsWith(`${name}=`));
-    return cookie ? decodeURIComponent(cookie.split('=').slice(1).join('=')) : null;
-  }
-
-  function buildMetaEventId() {
-    const now = Date.now().toString(36);
-    const random = Math.random().toString(36).slice(2, 10);
-    return `lead_${now}_${random}`;
-  }
-
-  function buildMetaFbc() {
-    const existingFbc = readCookie('_fbc');
-    if (existingFbc) return existingFbc;
-
-    const fbclid = new URLSearchParams(window.location.search).get('fbclid');
-    if (!fbclid) return null;
-
-    const synthesizedFbc = `fb.1.${Date.now()}.${fbclid}`;
-    document.cookie = `_fbc=${encodeURIComponent(synthesizedFbc)}; path=/; max-age=7776000; SameSite=Lax`;
-    return synthesizedFbc;
-  }
-
-  ctaLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      if (typeof fbq === 'function') {
-        fbq('track', 'Contact', {
-          content_name: 'Agendar avaliação',
-          content_category: 'CTA'
-        });
-      }
-    });
-  });
-
-  formInputs.forEach(input => {
-    input.addEventListener('focus', () => {
-      if (metaFormStarted || typeof fbq !== 'function') return;
-      metaFormStarted = true;
-      fbq('trackCustom', 'FormStart', {
-        form_name: 'Agende sua avaliação'
-      });
-    }, { once: true });
-  });
-
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
-    let valid = true;
-
-    ['nome', 'telefone'].forEach(name => {
-      const el  = formFields[name];
-      const err = formErrors[name];
-      const ok  = el.value.trim().length >= 2 && (name !== 'telefone' || el.value.replace(/\D/g,'').length >= 10);
-      err.classList.toggle('hidden', ok);
-      if (!ok && valid) { el.focus(); valid = false; }
-    });
-
-    if (!valid) return;
-
-    const params = new URLSearchParams(window.location.search);
-    const eventId = buildMetaEventId();
-    const eventTime = Math.floor(Date.now() / 1000);
-    const fbp = readCookie('_fbp');
-    const fbc = buildMetaFbc();
-    const payload = {
-      event_name:   'Lead',
-      event_id:     eventId,
-      event_time:   eventTime,
-      action_source:'website',
-      event_source_url: window.location.href,
-      client_user_agent: navigator.userAgent,
-      fbp:          fbp || null,
-      fbc:          fbc || null,
-      nome:         formFields.nome.value.trim(),
-      telefone:     formFields.telefone.value.trim(),
-      pagina:       'index',
-      utm_source:   params.get('utm_source')   || null,
-      utm_medium:   params.get('utm_medium')   || null,
-      utm_campaign: params.get('utm_campaign') || null,
-      utm_content:  params.get('utm_content')  || null,
-    };
-
-    /* Webhook — fire and forget */
-    fetch(WEBHOOK_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    }).catch(err => console.error('Webhook error:', err));
-
-    /* GTM dataLayer event */
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event: 'lead_submitted', ...payload });
-
-    /* Google Ads conversion */
-    if (typeof gtag_report_conversion === 'function') {
-      gtag_report_conversion();
-    }
-
-    /* Meta Pixel lead */
-    if (typeof fbq === 'function') {
-      fbq('track', 'Lead', {
-        content_name: 'Agende sua avaliação',
-        content_category: 'Formulário',
-        status: 'submitted'
-      }, {
-        eventID: eventId
-      });
-    }
-
-    form.style.display = 'none';
-    success.style.display = 'block';
-    success.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  });
-
-  formInputs.forEach(input => {
-    input.addEventListener('input', () => {
-      const err = formErrors[input.name];
-      if (err) err.classList.add('hidden');
-    });
-  });
-
-  /* ── Máscara telefone ── */
-  const tel = document.getElementById('telefone');
-  tel.addEventListener('input', e => {
-    let v = e.target.value.replace(/\D/g,'').slice(0,11);
-    if (v.length >= 7) v = v.replace(/^(\d{2})(\d{1})(\d{4})(\d{0,4})/, '($1) $2 $3-$4');
-    else if (v.length >= 3) v = v.replace(/^(\d{2})(\d{0,5})/, '($1) $2');
-    else if (v.length >= 1) v = v.replace(/^(\d{0,2})/, '($1');
-    e.target.value = v;
-  });
-</script>
 
 </body>
 </html>
