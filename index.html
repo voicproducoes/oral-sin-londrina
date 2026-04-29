@@ -431,10 +431,10 @@ src="https://www.facebook.com/tr?id=352020864036621&ev=PageView&noscript=1"
        style="clip-path: ellipse(85% 100% at 95% 50%);"></div>
 
   <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-8">
-    <div class="grid lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] gap-6 sm:gap-10 lg:gap-14 items-center">
+    <div class="grid lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] gap-6 sm:gap-10 lg:gap-14 items-stretch">
 
-      <!-- Esquerda: copy -->
-      <div class="fade-up above-fold order-1">
+      <!-- Esquerda: copy + imagem -->
+      <div class="fade-up above-fold order-1 flex flex-col gap-5">
         <div class="hero-panel p-6 sm:p-8 lg:p-10">
           <span class="inline-flex text-[0.7rem] sm:text-xs font-semibold tracking-[0.24em] uppercase text-verde/80 bg-verde-light px-3 py-1.5 rounded-full mb-4 sm:mb-5 font-headline">
             Londrina / PR
@@ -476,25 +476,25 @@ src="https://www.facebook.com/tr?id=352020864036621&ev=PageView&noscript=1"
             Condições de pagamento
           </span>
           </div>
+        </div>
 
-          <!-- Imagem hero dentro do card -->
-          <div class="relative w-full mt-6">
-            <img
-              src="hero-institucional.webp"
-              srcset="hero-mobile.webp 640w, hero-institucional.webp 1024w"
-              sizes="(max-width: 640px) 100vw, 560px"
-              alt="Paciente sorrindo com dentista especialista em implantes na Oral Sin Londrina"
-              class="w-full rounded-[1.25rem] object-cover shadow-[0_8px_24px_rgba(17,24,39,0.10)]"
-              style="max-height: 220px; object-position: center top;"
-              width="1024" height="571"
-              fetchpriority="high" loading="eager" decoding="async"
-            />
-            <div class="absolute -bottom-3 right-3">
-              <img src="Brasao-OS-1-1.webp"
-                   alt="Oral Sin — Rede de Implantes Nº 1 do Brasil"
-                   class="w-14 sm:w-16 drop-shadow-[0_8px_20px_rgba(17,24,39,0.22)]"
-                   width="112" height="112" loading="eager" decoding="async" />
-            </div>
+        <!-- Imagem hero abaixo do card, preenche espaço restante -->
+        <div class="relative flex-1 min-h-[180px]">
+          <img
+            src="hero-institucional.webp"
+            srcset="hero-mobile.webp 640w, hero-institucional.webp 1024w"
+            sizes="(max-width: 640px) 100vw, 560px"
+            alt="Paciente sorrindo com dentista especialista em implantes na Oral Sin Londrina"
+            class="w-full h-full rounded-[1.5rem] object-cover shadow-[0_16px_48px_rgba(17,24,39,0.13)]"
+            style="object-position: center top;"
+            width="1024" height="571"
+            fetchpriority="high" loading="eager" decoding="async"
+          />
+          <div class="absolute -bottom-4 right-4">
+            <img src="Brasao-OS-1-1.webp"
+                 alt="Oral Sin — Rede de Implantes Nº 1 do Brasil"
+                 class="w-16 sm:w-20 drop-shadow-[0_10px_24px_rgba(17,24,39,0.25)]"
+                 width="112" height="112" loading="eager" decoding="async" />
           </div>
         </div>
       </div>
