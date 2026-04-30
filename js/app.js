@@ -71,7 +71,7 @@ accordion.querySelectorAll('.acc-trigger').forEach(trigger => {
    TRACKING — Pixel + CAPI
 ══════════════════════════════════════════ */
 
-const WEBHOOK_URL   = 'https://nnwb.voictech.com.br/webhook/oralsin';
+const WEBHOOK_URL   = 'https://nnwb.voictech.com.br/webhook/oral-sin-londrina';
 const LP_PAGINA     = window.__LP_PAGINA  || 'index';
 const LP_VARIANT    = window.__LP_VARIANT || null;
 
