@@ -109,6 +109,7 @@ function getUtmParams() {
     utm_medium:   p.get('utm_medium')   || null,
     utm_campaign: p.get('utm_campaign') || null,
     utm_content:  p.get('utm_content')  || null,
+    utm_term:  p.get('utm_ter ')  || null,
   };
 }
 
